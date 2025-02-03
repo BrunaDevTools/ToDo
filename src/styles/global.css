@@ -9,9 +9,16 @@ body {
   background-color: #f2f1f1;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100vw;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+li {
+  list-style: none;
 }

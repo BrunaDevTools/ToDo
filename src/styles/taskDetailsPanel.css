@@ -1,0 +1,16 @@
+.task-details-panel {
+  background: #fff;
+  border-left: 1px solid #e0e0e0;
+  padding: 20px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}

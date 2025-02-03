@@ -1,7 +1,7 @@
 import { useTasks } from "../context/TasksContext";
 
-export default function TaskList() {
-  const { tasks, selectedTask, setSelectedTask } = useTasks();
+export default function TaskList({ onTaskClick }) {
+  const { tasks, selectedTask } = useTasks();
 
   return (
     <div>
@@ -10,13 +10,7 @@ export default function TaskList() {
         {tasks.map((task) => (
           <li
             key={task.id}
-            onClick={() => {
-              if (selectedTask?.id === task.id) {
-                setSelectedTask(null);
-              } else {
-                setSelectedTask(task);
-              }
-            }}
+            onClick={() => onTaskClick(task)}
             style={{
               display: "flex",
               alignItems: "center",

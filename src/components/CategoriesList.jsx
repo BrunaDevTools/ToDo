@@ -1,4 +1,5 @@
 import { FaSun, FaStar, FaList, FaDumbbell, FaBriefcase } from "react-icons/fa";
+import { useCategories } from "../context/CategoriesContext";
 
 const iconComponents = {
   FaSun,
@@ -7,20 +8,20 @@ const iconComponents = {
   FaDumbbell,
   FaBriefcase,
 };
-import { useCategories } from "../context/CategoriesContext";
 
-export default function CategoriesList() {
+export default function CategoriesList({ onCategoryClick }) {
   const { categories, selectedCategory, setSelectedCategory } = useCategories();
 
   return (
     <div>
+      <h3>Categories</h3>
       <ul>
         {categories.map((category) => {
           const IconComponent = iconComponents[category.icon];
           return (
             <li
               key={category.id}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => onCategoryClick(category)}
               style={{
                 display: "flex",
                 alignItems: "center",
