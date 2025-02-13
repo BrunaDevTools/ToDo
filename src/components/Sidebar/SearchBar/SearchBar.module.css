@@ -1,4 +1,4 @@
-.search-container {
+.searchContainer {
   position: relative;
   display: flex;
   align-items: center;
@@ -7,7 +7,7 @@
   gap: 8px;
 }
 
-.search-input {
+.searchInput {
   width: 95%;
   padding: 4px 30px 4px 4px;
   border: none;
@@ -21,12 +21,12 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.search-input:focus {
-  border-bottom: 2px solid #01b0c4;
+.searchInput:focus {
+  border-bottom: 2px solid var(--turquesa);
   box-shadow: 0 2px 5px rgba(0, 128, 0, 0.2);
 }
 
-.search-icon {
+.searchIcon {
   position: absolute;
   right: 35px;
   color: #323232;

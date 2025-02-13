@@ -1,4 +1,4 @@
-.username-container {
+.usernameContainer {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -16,5 +16,5 @@
 .username {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: var(--main-font-color);
 }

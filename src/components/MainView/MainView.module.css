@@ -1,0 +1,6 @@
+.mainView {
+  padding: 30px;
+  border: 1px solid var(--turquesa-claro);
+  border-radius: 15px;
+  background-color: var(--turquesa-base);
+}

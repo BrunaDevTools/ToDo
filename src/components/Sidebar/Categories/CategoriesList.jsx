@@ -1,5 +1,5 @@
 import { FaSun, FaStar, FaList, FaDumbbell, FaBriefcase } from "react-icons/fa";
-import { useCategories } from "../context/CategoriesContext";
+import { useCategories } from "../../../context/CategoriesContext";
 
 const iconComponents = {
   FaSun,
@@ -9,9 +9,9 @@ const iconComponents = {
   FaBriefcase,
 };
 
-export default function CategoriesList({ onCategoryClick }) {
-  const { categories, selectedCategory, setSelectedCategory } = useCategories();
-
+export default function CategoriesList({ categories, onCategoryClick }) {
+  const { selectedCategory, setSelectedCategory } = useCategories();
+  console.log("Categorías recibidas:", categories);
   return (
     <div>
       <h3>Categories</h3>

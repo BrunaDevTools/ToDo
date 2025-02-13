@@ -1,6 +1,6 @@
-import "./../styles/mainView.css";
-import { useCategories } from "../context/CategoriesContext";
-import { useTasks } from "../context/TasksContext";
+import styles from "./MainView.module.css";
+import { useCategories } from "../../context/CategoriesContext";
+import { useTasks } from "../../context/TasksContext";
 
 export default function MainView({ selectedCategory, selectedTask }) {
   const { tasks } = useTasks();
@@ -11,7 +11,7 @@ export default function MainView({ selectedCategory, selectedTask }) {
     : [];
 
   return (
-    <div className="main-view">
+    <div className={styles.mainView}>
       {/* Mostrar la categoría seleccionada */}
       {selectedCategory && (
         <>

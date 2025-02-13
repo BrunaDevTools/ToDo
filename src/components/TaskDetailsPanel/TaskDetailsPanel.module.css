@@ -1,10 +1,10 @@
-.task-details-panel {
+.taskDetailsPanel {
   background: #fff;
   border-left: 1px solid #e0e0e0;
   padding: 20px;
 }
 
-.close-button {
+.closeButton {
   background: none;
   border: none;
   color: #000;

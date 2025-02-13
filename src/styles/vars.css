@@ -1,0 +1,18 @@
+:root {
+  --background-body-color: #f2f1f1; /* Color de fondo del body */
+  --main-font-color: #333; /* Color de texto principal */
+
+  --turquesa-base: #0ebab5;
+  --turquesa-claro: #40d9d4;
+
+  --button-cancel: #ff4040;
+  --button-confirm: #00c781;
+
+  /* Colores para botones */
+  --button-bg-color: #f9f9f9; /* Fondo del botón */
+  --button-text-color: #213547; /* Texto del botón */
+  --button-hover-border-color: #646cff; /* Borde al pasar el mouse */
+
+  /* Colores para enlaces */
+  --link-hover-color: #747bff; /* Color de enlace al pasar el mouse */
+}
