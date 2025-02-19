@@ -9,11 +9,15 @@ const iconComponents = {
   FaBriefcase,
 };
 
-export default function CategoriesList({ categories, onCategoryClick }) {
+export default function CategoriesList({
+  categories,
+  onCategoryClick,
+  className,
+}) {
   const { selectedCategory, setSelectedCategory } = useCategories();
   console.log("Categorías recibidas:", categories);
   return (
-    <div>
+    <div className={className}>
       <h3>Categories</h3>
       <ul>
         {categories.map((category) => {

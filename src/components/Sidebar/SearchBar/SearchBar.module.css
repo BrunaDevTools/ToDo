@@ -2,14 +2,14 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 8px;
+  margin: 13px 10px 13px 0;
   border-radius: 8px;
   gap: 8px;
 }
 
 .searchInput {
-  width: 95%;
-  padding: 4px 30px 4px 4px;
+  width: 100%;
+  padding: 4px 30px 4px 8px;
   border: none;
   border: 1.5px solid #ccc;
   border-bottom: 2px solid #ccc;
@@ -28,6 +28,6 @@
 
 .searchIcon {
   position: absolute;
-  right: 35px;
+  right: 20px;
   color: #323232;
 }

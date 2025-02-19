@@ -28,7 +28,6 @@ function App() {
   // Funcion para seleccionar una tarea
   const handleTaskClick = (task) => {
     setSelectedTask(task);
-    setSelectedCategory(null);
     setIsDatailsOpen(true);
   };
 
@@ -93,6 +92,7 @@ function App() {
         <MainView
           selectedCategory={selectedCategory}
           selectedTask={selectedTask}
+          onTaskClick={handleTaskClick}
         />
         {isDatailsOpen && (
           <TaskDetailsPanel

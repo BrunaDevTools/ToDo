@@ -1,11 +1,11 @@
 import { useTasks } from "../../../context/TasksContext";
 
-export default function TaskList({ tasks, onTaskClick }) {
+export default function TaskList({ tasks, onTaskClick, className }) {
   const { selectedTask } = useTasks();
 
   console.log("Tareas recibidas:", tasks);
   return (
-    <div>
+    <div className={className}>
       <h3>Tasks</h3>
       <ul>
         {tasks.map((task) => (

@@ -2,14 +2,19 @@
   --background-body-color: #f2f1f1; /* Color de fondo del body */
   --main-font-color: #333; /* Color de texto principal */
 
-  --turquesa-base: #0ebab5;
-  --turquesa-claro: #40d9d4;
+  --turquesa-base: #0ebab5; /* Color base--background de main view */
+  --turquesa-claro: #40d9d4; /* Color de detalles de botones y más */
 
-  --button-cancel: #ff4040;
-  --button-confirm: #00c781;
+  /* Color de input */
+  --input-bg-color: #ecf1fe;
 
   /* Colores para botones */
+  --button-cancel: #ff4040; /* Btn cancelar */
+  --button-confirm: #00c781; /* Btn confirmar */
   --button-bg-color: #f9f9f9; /* Fondo del botón */
+  --button-background: #3c76f1;
+  --button-background-hover: #2a53a9;
+
   --button-text-color: #213547; /* Texto del botón */
   --button-hover-border-color: #646cff; /* Borde al pasar el mouse */
 

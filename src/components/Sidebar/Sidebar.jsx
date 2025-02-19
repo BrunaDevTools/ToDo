@@ -12,21 +12,26 @@ export default function Sidebar({
   onAddCategory,
   onAddTask,
 }) {
+  // Filtro tareas que no tienen categoria (tareas globales)
+  const globalTasks = tasks.filter((task) => !task.categoryId);
+
   return (
     <>
       <div className={styles.container}>
         <UserName name="Bruna" avatar="./img/avatar.jpg" />
         <SearchBar />
-        <CategoriesList
-          className={styles.categoryContainer}
-          categories={categories}
-          onCategoryClick={onCategoryClick}
-        />
-        <TaskList
-          className={styles.taskContainer}
-          tasks={tasks}
-          onTaskClick={onTaskClick}
-        />
+        <div className={styles.categoriesAndTasksContainer}>
+          <CategoriesList
+            className={styles.categoryContainer}
+            categories={categories}
+            onCategoryClick={onCategoryClick}
+          />
+          <TaskList
+            className={styles.taskContainer}
+            tasks={globalTasks}
+            onTaskClick={onTaskClick}
+          />
+        </div>
         <div className={`${styles.buttonsContainer} ${styles.sidebarControls}`}>
           <button onClick={onAddCategory} className={styles.addButton}>
             + New Category

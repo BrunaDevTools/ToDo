@@ -1,6 +1,73 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   background-color: var(--background-body-color);
+  padding: 15px 10px 10px 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.categoriesAndTasksContainer {
+  padding: 10px 0;
+}
+
+.categoryContainer,
+.taskContainer {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px; /* Espacio para el scroll */
+}
+
+.categoryContainer:hover,
+.taskContainer:hover {
+  overflow-y: auto;
+}
+/* Estilos a la barra de scroll */
+.categoryContainer::-webkit-scrollbar,
+.taskContainer::-webkit-scrollbar {
+  width: 4px; /* Ancho de la barra de scroll */
+}
+
+.categoryContainer::-webkit-scrollbar-track,
+.taskContainer::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la barra */
+  border-radius: 4px;
+}
+
+.categoryContainer::-webkit-scrollbar-thumb,
+.taskContainer::-webkit-scrollbar-thumb {
+  background: #888; /* Color de la barra */
+  border-radius: 4px;
+}
+
+.categoryContainer::-webkit-scrollbar-thumb:hover,
+.taskContainer::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color al pasar el mouse */
+}
+
+.buttonsContainer {
+  margin-top: auto;
+  margin-bottom: 5px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.addButton {
+  flex: 1;
+  min-height: 50px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.86em;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.addButton:hover {
+  background-color: var(--button-hover-bg-color);
+  transform: scale(1.02);
 }

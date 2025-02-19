@@ -1,16 +1,83 @@
 .taskDetailsPanel {
-  background: #fff;
-  border-left: 1px solid #e0e0e0;
-  padding: 20px;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  padding: 16px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .closeButton {
   background: none;
   border: none;
-  color: #000;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1.2rem;
-  position: absolute;
-  right: 20px;
-  top: 20px;
+  align-self: flex-end;
+}
+
+.taskDetailsMain {
+  margin-top: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.taskTitleInput {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.addStep {
+  margin-left: 8px;
+  padding: 4px 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 10px;
+}
+
+.stepItem:hover {
+  background-color: #e0e0e0;
+}
+
+.stepCheckbox {
+  appearance: none;
+  border: 1px solid var(--main-font-color);
+  width: 13px;
+  height: 13px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.deleteStepButton {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
 }

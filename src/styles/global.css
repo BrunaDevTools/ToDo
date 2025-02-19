@@ -34,3 +34,7 @@ button:focus-visible {
 a:hover {
   color: var(--link-hover-color);
 }
+
+li {
+  list-style: none;
+}

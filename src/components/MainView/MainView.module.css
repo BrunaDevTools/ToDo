@@ -3,4 +3,90 @@
   border: 1px solid var(--turquesa-claro);
   border-radius: 15px;
   background-color: var(--turquesa-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mainView h1 {
+  color: white;
+}
+
+.taskInputContainer {
+  margin-left: 0;
+  margin-top: auto;
+  padding: 16px 16px 16px 0;
+  border-top: 1px solid var(--turquesa-claro);
+}
+
+.taskInputContainer form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.taskInput {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid var(--input-bg-color);
+  border-radius: 4px;
+  background-color: var(--input-bg-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.taskInput:focus {
+  border-color: var(--button-background);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.taskInputButton {
+  padding: 16px 16px;
+  background-color: var(--button-background);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.8s ease, transform 0.2s ease;
+}
+
+.taskInputButton:hover {
+  background-color: var(--button-background-hover);
+  transform: scale(1.05);
+}
+
+.taskInputButton:active {
+  transform: scale(0.95);
+}
+
+.taskCheckbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--button-background);
+  border-radius: 50%;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.taskCheckbox:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.taskCheckbox:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+}
+
+.taskItem {
+  cursor: pointer;
 }
