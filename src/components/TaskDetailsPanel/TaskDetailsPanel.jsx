@@ -1,6 +1,6 @@
 import styles from "./TaskDetailsPanel.module.css";
-import { LiaTrashSolid } from "react-icons/lia";
-import { useState, useEffect } from "react";
+import { LiaTrashSolid, LiaWindowCloseSolid } from "react-icons/lia";
+import { useState, useEffect, useRef } from "react";
 import { useTasks } from "../../context/TasksContext";
 
 export default function TaskDetailsPanel({ task, onClose }) {
@@ -10,12 +10,36 @@ export default function TaskDetailsPanel({ task, onClose }) {
   const [notes, setNotes] = useState("");
   const [editedTitle, setEditedTitle] = useState(task.title);
 
+  // Referencia (useRef) para el focus en inputTask
+  const inputRef = useRef(null);
+
   // Sincronizo el estado interno para cambiar de task
   useEffect(() => {
     setEditedTitle(task.title);
     setSteps(task.steps || []);
     setNotes(task.notes || "");
+
+    inputRef.current?.focus(); //Hace focus cuando el componente se monta
   }, [task]);
+
+  // Guardar el titulo cuando el susuario presiona enter o cambia de foco
+  const handleTitleSubmit = (e) => {
+    e.preventDefault();
+    if (!editedTitle.trim()) return;
+
+    setTasks((prevTasks) =>
+      prevTasks.map((t) =>
+        t.id === task.id ? { ...t, title: editedTitle } : t
+      )
+    );
+  };
+
+  // Guardar las notas cuando el usuario deja de escribir
+  const handleNotesBlur = () => {
+    setTasks((prevTasks) =>
+      prevTasks.map((t) => (t.id === task.id ? { ...t, notes: notes } : t))
+    );
+  };
 
   // Agrega un paso
   const handleAddStep = (e) => {
@@ -28,6 +52,7 @@ export default function TaskDetailsPanel({ task, onClose }) {
       };
       const updatedSteps = [...steps, newStepObject];
       setSteps(updatedSteps);
+
       setNewStep("");
 
       // Actualizar la tarea en el estado global
@@ -66,81 +91,84 @@ export default function TaskDetailsPanel({ task, onClose }) {
 
   // Borrar la tarea
   const handleDeleteTask = () => {
-    const updatedTasks = tasks.filter((t) => t.id !== task.id);
-    setTasks(updatedTasks);
+    setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id));
     onClose();
   };
 
   // Editar el nombre de la tarea
-  const handleTitleSubmit = (e) => {
-    e.preventDefault();
-    if (!editedTitle.trim()) return;
-    const updatedTasks = tasks.map((t) =>
-      t.id === task.id ? { ...t, title: editedTitle } : t
-    );
-    setTasks(updatedTasks);
-  };
+  //const handleTitleSubmit = (e) => {
+  //  e.preventDefault();
+  //  if (!editedTitle.trim()) return;
+  //  const updatedTasks = tasks.map((t) =>
+  //    t.id === task.id ? { ...t, title:editedTitle } : t
+  //  );
+  //  setTasks(updatedTasks);
+  //};
 
   return (
     <div className={styles.taskDetailsPanel}>
       <button onClick={onClose} className={styles.closeButton}>
-        X
+        <LiaWindowCloseSolid className={styles.closeIcon} />
       </button>
       <div className={styles.taskDetailsMain}>
-        <form onSubmit={handleTitleSubmit}>
-          <input
-            type="text"
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-            className={styles.taskTitleInput}
-          />
-        </form>
-        <div>
-          <form onSubmit={handleAddStep}>
+        <div className={styles.titleAndSteps}>
+          <form onSubmit={handleTitleSubmit}>
             <input
               type="text"
-              value={newStep}
-              onChange={(e) => setNewStep(e.target.value)}
-              placeholder="Agregar paso"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+              onBlur={handleTitleSubmit} // Guarda el título cuando pierde el foco
+              className={styles.taskTitleInput}
             />
           </form>
-          <button onClick={handleAddStep} className={styles.addStep}>
-            + Agregar paso
-          </button>
-        </div>
-        <ul>
-          {steps.map((step) => (
-            <li key={step.id} className={styles.stepItem}>
+          <div>
+            <form onSubmit={handleAddStep}>
               <input
-                type="checkbox"
-                checked={step.completed}
-                onChange={() => handleStepCompletion(step.id)}
-                className={styles.stepCheckbox}
+                ref={inputRef}
+                type="text"
+                value={newStep}
+                onChange={(e) => setNewStep(e.target.value)}
+                placeholder="+  Agregar paso"
+                className={styles.addStep}
               />
-              <span
-                style={{
-                  textDecoration: step.completed ? "line-through" : "none",
-                }}
-              >
-                {step.text}
-              </span>
-              <button
-                onClick={() => handleDeleteStep(step.id)}
-                className={styles.deleteStepButton}
-              >
-                <LiaTrashSolid />
-              </button>
-            </li>
-          ))}
-        </ul>
+            </form>
+          </div>
+          <ul className={styles.stepsContainer}>
+            {steps.map((step) => (
+              <li key={step.id} className={styles.stepItem}>
+                <input
+                  type="checkbox"
+                  checked={step.completed}
+                  onChange={() => handleStepCompletion(step.id)}
+                  className={styles.stepCheckbox}
+                />
+                <span
+                  style={{
+                    textDecoration: step.completed ? "line-through" : "none",
+                  }}
+                >
+                  {step.text}
+                </span>
+                <button
+                  onClick={() => handleDeleteStep(step.id)}
+                  className={styles.deleteStepButton}
+                >
+                  <LiaTrashSolid />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
+          onBlur={handleNotesBlur} // Guarda las notas cuando pierde el foco
           placeholder="Agregar nota"
         />
       </div>
       <button onClick={handleDeleteTask} className={styles.deleteBtn}>
-        Borrar
+        Delete Task
+        <LiaTrashSolid className={styles.trashIcon} />
       </button>
     </div>
   );

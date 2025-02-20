@@ -103,6 +103,9 @@ export default function MainView({
           </ul>
           <div className={styles.taskInputContainer}>
             <form onSubmit={handleSubmit}>
+              <button type="submit" className={styles.taskInputButton}>
+                +
+              </button>
               <input
                 type="text"
                 className={styles.taskInput}
@@ -110,9 +113,6 @@ export default function MainView({
                 onChange={handleInputChange}
                 placeholder="Add a new task..."
               />
-              <button type="submit" className={styles.taskInputButton}>
-                Add
-              </button>
             </form>
           </div>
         </>

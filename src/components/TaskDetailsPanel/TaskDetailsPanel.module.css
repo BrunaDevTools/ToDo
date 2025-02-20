@@ -1,83 +1,177 @@
+/* Contenedor */
 .taskDetailsPanel {
-  background-color: #fff;
-  border-left: 1px solid #ddd;
-  padding: 16px;
-  right: 0;
-  top: 0;
-  height: 100%;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  padding: 15px;
+  background-color: var(--background-body-color);
+  border-left: 1px solid #e0e0e0;
+  width: 300px;
+  height: 100vh;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Btn cerrar contenedor */
 .closeButton {
+  padding: 0;
+  align-self: flex-end;
   background: none;
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  align-self: flex-end;
+}
+.closeIcon {
+  font-size: 1.5rem;
 }
 
+/* Contenedor de los detalles de la tarea */
 .taskDetailsMain {
-  margin-top: 16px;
-  height: 100%;
+  flex-grow: 1;
+}
+
+/* Contenedor de nombre de task y pasos */
+.titleAndSteps {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+  min-height: 200px;
+  background-color: var(--hover-claro-bg-body);
+  border-radius: 8px;
 }
 
 .taskTitleInput {
+  /* Nombre de tarea */
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 20px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 0.9px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+.taskTitleInput:focus {
+  outline: 2px solid var(--turquesa-base); /* Cambia el borde interno al hacer clic */
+  outline-offset: -2px; /* Para que no sobresalga */
+  border-radius: 8px;
 }
 
 .addStep {
-  margin-left: 8px;
-  padding: 4px 8px;
-  background-color: #007bff;
-  color: #fff;
+  /* Boton de agregar paso */
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px;
+  width: 100%;
+}
+.addStep:focus,
+textarea:focus {
+  box-shadow: 0 0 5px var(--input-focus-color);
+  outline: none;
 }
 
-.deleteBtn {
-  margin-top: 16px;
-  padding: 8px 16px;
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.stepItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+.stepsContainer {
+  margin-top: 10px;
+  min-height: 120px;
+  max-height: 300px;
+  overflow-y: auto;
   padding: 10px;
 }
 
+/* Estilos a la barra de scroll */
+.stepsContainer::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+  width: 4px; /* Ancho de la barra de scroll */
+}
+.stepsContainer::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de fondo de la barra */
+  border-radius: 4px;
+}
+.stepsContainer::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb {
+  background: #888; /* Color de la barra */
+  border-radius: 4px;
+}
+.stepsContainer::-webkit-scrollbar-thumb:hover,
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color al pasar el mouse */
+}
+
+/* Step items */
+.stepItem {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 0.7px solid #e0e0e0;
+}
 .stepItem:hover {
   background-color: #e0e0e0;
 }
 
+/* Checkbox step */
 .stepCheckbox {
-  appearance: none;
-  border: 1px solid var(--main-font-color);
-  width: 13px;
-  height: 13px;
-  margin-right: 8px;
   cursor: pointer;
+  margin-right: 10px;
+  appearance: none;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
+  border: 1px solid var(--main-font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+/* Mostrar tilde en hover */
+.stepCheckbox:hover::before {
+  content: "✔";
+  font-size: 12px;
+  color: #333;
+  position: absolute;
+}
+/* Mostrar tilde cuando está marcado */
+.stepCheckbox:checked::before {
+  content: "✔";
+  font-size: 12px;
+  color: var(--main-font-color);
 }
 
 .deleteStepButton {
-  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  margin-left: auto;
+}
+
+/* Nota */
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 1.2px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-top: 20px;
+  resize: vertical;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 15px;
+  color: var(--main-font-color);
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: var(--hover-claro-bg-body);
+  border-radius: 8px;
+}
+.trashIcon {
+  font-size: 1.5rem;
+}
+
+.deleteBtn:hover {
+  color: var(--button-cancel);
 }

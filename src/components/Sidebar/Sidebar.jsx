@@ -37,7 +37,7 @@ export default function Sidebar({
             + New Category
           </button>
           <button onClick={onAddTask} className={styles.addButton}>
-            + New Task
+            + New Note
           </button>
         </div>
       </div>

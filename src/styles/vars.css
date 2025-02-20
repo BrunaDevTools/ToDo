@@ -5,15 +5,18 @@
   --turquesa-base: #0ebab5; /* Color base--background de main view */
   --turquesa-claro: #40d9d4; /* Color de detalles de botones y más */
 
+  --border-color: #e0e0e0; /* Color para bordes y lineas */
+
+  --hover-claro-bg-body: #ffffff;
+
   /* Color de input */
   --input-bg-color: #ecf1fe;
+  --input-focus-color: #0ebab48e;
 
   /* Colores para botones */
   --button-cancel: #ff4040; /* Btn cancelar */
   --button-confirm: #00c781; /* Btn confirmar */
   --button-bg-color: #f9f9f9; /* Fondo del botón */
-  --button-background: #3c76f1;
-  --button-background-hover: #2a53a9;
 
   --button-text-color: #213547; /* Texto del botón */
   --button-hover-border-color: #646cff; /* Borde al pasar el mouse */

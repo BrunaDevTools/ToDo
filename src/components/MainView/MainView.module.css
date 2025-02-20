@@ -1,5 +1,5 @@
 .mainView {
-  padding: 30px;
+  padding: 40px 40px 10px 40px;
   border: 1px solid var(--turquesa-claro);
   border-radius: 15px;
   background-color: var(--turquesa-base);
@@ -10,6 +10,7 @@
 
 .mainView h1 {
   color: white;
+  margin-bottom: 10px;
 }
 
 .taskInputContainer {
@@ -26,57 +27,78 @@
 }
 
 .taskInput {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border: 1px solid var(--input-bg-color);
   border-radius: 4px;
-  background-color: var(--input-bg-color);
+  background-color: var(--background-body-color);
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+.taskInput:hover {
+  background-color: var(--hover-claro-bg-body);
+}
 
 .taskInput:focus {
-  border-color: var(--button-background);
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 5px white;
   outline: none;
 }
 
+/* Estilos para le boton de agregar nueva Task */
 .taskInputButton {
-  padding: 16px 16px;
-  background-color: var(--button-background);
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--background-body-color);
+  font-size: 1rem;
+  color: var(--main-font-color);
   border: none;
-  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.8s ease, transform 0.2s ease;
+  transition: background-color 0.8s ease, transform 0.2s ease, outline 0.2s ease;
 }
 
 .taskInputButton:hover {
-  background-color: var(--button-background-hover);
+  background-color: var(--hover-claro-bg-body);
   transform: scale(1.05);
 }
-
 .taskInputButton:active {
   transform: scale(0.95);
 }
+.taskInputButton:focus,
+.taskInputButton:active {
+  outline: 3px solid rgba(0, 123, 255, 0.5); /* Cambia el borde interno al hacer clic */
+  outline-offset: -2px; /* Para que no sobresalga */
+}
 
 .taskCheckbox {
+  cursor: pointer;
+  margin-right: 10px;
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--button-background);
   border-radius: 50%;
-  margin-right: 8px;
-  cursor: pointer;
+  border: 1px solid var(--turquesa-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Mostrar tilde en hover */
+.taskCheckbox:hover::before {
+  content: "✔";
+  font-size: 12px;
+  color: var(--turquesa-base);
+  position: absolute;
+}
+/* Mostrar tilde cuando esta marcado */
 .taskCheckbox:checked {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: var(--turquesa-base);
+  border-color: var(--turquesa-claro);
 }
-
 .taskCheckbox:checked::after {
   content: "✔";
   position: absolute;
@@ -88,5 +110,16 @@
 }
 
 .taskItem {
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--background-body-color);
+}
+
+.taskItem:hover {
+  background-color: var(--hover-claro-bg-body);
 }

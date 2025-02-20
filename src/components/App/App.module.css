@@ -1,4 +1,5 @@
 @import "../../styles/vars.css";
+@import "../../styles/fonts.css";
 
 .mainContainer {
   display: grid;
