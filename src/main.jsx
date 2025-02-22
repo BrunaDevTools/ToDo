@@ -6,12 +6,15 @@ import "./styles/global.css";
 import "./styles/vars.css";
 import { CategoriesProvider } from "./context/CategoriesContext.jsx";
 import { TasksProvider } from "./context/TasksContext.jsx";
+import { NotesProvider } from "./context/NotesContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CategoriesProvider>
       <TasksProvider>
-        <App />
+        <NotesProvider>
+          <App />
+        </NotesProvider>
       </TasksProvider>
     </CategoriesProvider>
   </StrictMode>

@@ -1,20 +1,19 @@
 import SearchBar from "./SearchBar/SearchBar";
 import UserName from "./UserName/UserName";
 import CategoriesList from "./Categories/CategoriesList";
-import TaskList from "./Tasks/TaskList";
+import { useNotes } from "../../context/NotesContext";
+import NoteList from "./Notes/NoteList";
 import styles from "./Sidebar.module.css";
 
 export default function Sidebar({
   categories,
-  tasks,
+  notes,
+  selectedNote,
   onCategoryClick,
-  onTaskClick,
+  onNoteClick,
   onAddCategory,
-  onAddTask,
+  onAddNote,
 }) {
-  // Filtro tareas que no tienen categoria (tareas globales)
-  const globalTasks = tasks.filter((task) => !task.categoryId);
-
   return (
     <>
       <div className={styles.container}>
@@ -26,17 +25,18 @@ export default function Sidebar({
             categories={categories}
             onCategoryClick={onCategoryClick}
           />
-          <TaskList
+          <NoteList
             className={styles.taskContainer}
-            tasks={globalTasks}
-            onTaskClick={onTaskClick}
+            notes={notes}
+            selectedNote={selectedNote}
+            onNoteClick={onNoteClick}
           />
         </div>
         <div className={`${styles.buttonsContainer} ${styles.sidebarControls}`}>
           <button onClick={onAddCategory} className={styles.addButton}>
             + New Category
           </button>
-          <button onClick={onAddTask} className={styles.addButton}>
+          <button onClick={onAddNote} className={styles.addButton}>
             + New Note
           </button>
         </div>

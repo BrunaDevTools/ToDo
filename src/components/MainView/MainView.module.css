@@ -123,3 +123,26 @@
 .taskItem:hover {
   background-color: var(--hover-claro-bg-body);
 }
+
+/* Note */
+.noteContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.titleNote {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.noteTextarea {
+  padding: 20px;
+  height: 80%;
+  width: 100%;
+  background-color: var(--background-body-color);
+  font-size: 1rem;
+  color: var(--main-font-color);
+  border: none;
+  transition: background-color 0.8s ease, transform 0.2s ease, outline 0.2s ease;
+}

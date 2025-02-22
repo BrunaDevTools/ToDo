@@ -7,6 +7,7 @@ export default function ModalForm({
   onSubmit,
   title,
   placeholder,
+  showInput = true, // Por defecto, mostrar el input
 }) {
   const [inputValue, setInputValue] = useState("");
 
@@ -15,7 +16,7 @@ export default function ModalForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (typeof onSubmit === "function") {
-      onSubmit(inputValue);
+      onSubmit(showInput ? inputValue : null); // Pasar el valor solo si showInput es true
       setInputValue("");
       onClose();
     } else {
@@ -28,23 +29,25 @@ export default function ModalForm({
       <div className={styles.modalContent}>
         <h3>{title}</h3>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder={placeholder}
-            autoFocus
-          />
+          {showInput && (
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder={placeholder}
+              autoFocus
+            />
+          )}
           <div className={styles.modalButtons}>
             <button
               type="button"
               onClick={onClose}
               className={styles.cancelBtn}
             >
-              Cancel
+              Cancelar
             </button>
             <button type="submit" className={styles.confirmBtn}>
-              Create
+              {title.includes("Eliminar") ? "Eliminar" : "Confirmar"}
             </button>
           </div>
         </form>
