@@ -17,7 +17,7 @@ function App() {
   const { selectedTask, setSelectedTask, tasks, setTasks } = useTasks();
   const { notes, setNotes, addNote } = useNotes();
   // Estados locales para controlar modales y nota seleccionada
-  const [isDatailsOpen, setIsDatailsOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showNoteModal, setShowNoteModal] = useState(false);
@@ -27,13 +27,13 @@ function App() {
     setSelectedCategory(category);
     setSelectedTask(null);
     setSelectedNote(null);
-    setIsDatailsOpen(false);
+    setIsDetailsOpen(false);
   };
 
   // Funcion para seleccionar una tarea
   const handleTaskClick = (task) => {
     setSelectedTask(task);
-    setIsDatailsOpen(true);
+    setIsDetailsOpen(true);
   };
 
   //Funcion para seleccionar una nota
@@ -42,7 +42,7 @@ function App() {
     setSelectedNote(note);
     setSelectedCategory(null);
     setSelectedTask(null);
-    setIsDatailsOpen(false);
+    setIsDetailsOpen(false);
   };
 
   // Funcion para agregar una nueva categoria
@@ -88,13 +88,15 @@ function App() {
     setNotes([...notes, newNote]);
     // Selecciona la nota recien creada para mostrarla en MainView
     setSelectedNote(newNote);
+    setSelectedCategory(null);
+    setIsDetailsOpen(false);
   };
 
   return (
     <>
       <div
         className={`${styles.mainContainer} ${
-          isDatailsOpen ? styles.mainContainerWithDetails : ""
+          isDetailsOpen ? styles.mainContainerWithDetails : ""
         }`}
       >
         <Sidebar
@@ -129,10 +131,10 @@ function App() {
           onTaskClick={handleTaskClick}
           onNoteClick={handleNoteClick}
         />
-        {isDatailsOpen && (
+        {isDetailsOpen && (
           <TaskDetailsPanel
             task={selectedTask}
-            onClose={() => setIsDatailsOpen(false)}
+            onClose={() => setIsDetailsOpen(false)}
           />
         )}
       </div>
