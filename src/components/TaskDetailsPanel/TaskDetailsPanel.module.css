@@ -24,6 +24,9 @@
 
 /* Contenedor de los detalles de la tarea */
 .taskDetailsMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   flex-grow: 1;
 }
 
@@ -33,6 +36,7 @@
   flex-direction: column;
   margin-top: 20px;
   width: 100%;
+  min-width: 0;
   min-height: 200px;
   background-color: var(--hover-claro-bg-body);
   border-radius: 8px;
@@ -47,11 +51,25 @@
   border-radius: 8px 8px 0 0;
   border-bottom: 0.9px solid #e0e0e0;
   margin-bottom: 20px;
+  white-space: nowrap; /* Evita salto de línea */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 269px;
 }
 .taskTitleInput:focus {
   outline: 2px solid var(--turquesa-base); /* Cambia el borde interno al hacer clic */
   outline-offset: -2px; /* Para que no sobresalga */
   border-radius: 8px;
+}
+.taskTitleInput:hover::after {
+  content: attr(title); /* Muestra el texto completo */
+  position: absolute;
+  background: var(--background-body-color);
+  border: 1px solid var(--turquesa-claro);
+  padding: 8px;
+  border-radius: 4px;
+  z-index: 1000;
+  margin-top: 5px;
 }
 
 .addStep {
@@ -119,6 +137,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-shrink: 0;
 }
 /* Mostrar tilde en hover */
 .stepCheckbox:hover::before {

@@ -21,7 +21,7 @@ function App() {
   const [selectedNote, setSelectedNote] = useState(null);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showNoteModal, setShowNoteModal] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(false);
   // Funcion para selecionar una categoria
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
