@@ -387,8 +387,10 @@ export default function MainView({
       {/* Mostrar mensaje cuando no hay nada seleccionado */}
       {!selectedCategory && !selectedNote && (
         <div className={styles.placeholderMessge}>
-          <p>Hello!</p>
-          <p>Select a category or note to get started</p>
+          <p className={styles.hello}>Hello!</p>
+          <p className={styles.text}>
+            Select a category or note to get started...
+          </p>
         </div>
       )}
     </div>

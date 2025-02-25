@@ -1,3 +1,17 @@
+.placeholderMessge {
+  color: #fff;
+
+  align-self: flex-start;
+}
+
+.placeholderMessge .hello {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.placeholderMessge .text {
+  font-size: 1.5rem;
+}
+
 .mainView {
   padding: 40px 40px 10px 40px;
   border: 1px solid var(--turquesa-claro);
