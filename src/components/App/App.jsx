@@ -58,6 +58,8 @@ function App() {
       fixed: false,
     };
     setCategories([...categories, newCategory]);
+    setIsDetailsOpen(false);
+    setSelectedCategory(newCategory);
   };
 
   // Funcion para agregar nueva tarea
@@ -112,20 +114,27 @@ function App() {
         />
         <ModalForm
           isOpen={showCategoryModal}
-          onClose={() => setShowCategoryModal(false)}
+          onClose={() => {
+            setShowCategoryModal(false);
+            setMenuOpen(false);
+          }}
           onSubmit={handleAddCategory}
           title="New category"
           placeholder="Category name..."
         />
         <ModalForm
           isOpen={showNoteModal}
-          onClose={() => setShowNoteModal(false)}
+          onClose={() => {
+            setShowNoteModal(false);
+            setMenuOpen(false);
+          }}
           onSubmit={handleAddNote}
           title="New Note"
           placeholder="Note title..."
         />
         <MainView
           selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
           selectedTask={selectedTask}
           selectedNote={selectedNote}
           onTaskClick={handleTaskClick}

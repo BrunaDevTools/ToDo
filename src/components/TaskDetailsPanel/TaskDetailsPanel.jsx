@@ -2,8 +2,10 @@ import styles from "./TaskDetailsPanel.module.css";
 import { LiaTrashSolid, LiaWindowCloseSolid } from "react-icons/lia";
 import { useState, useEffect, useRef } from "react";
 import { useTasks } from "../../context/TasksContext";
+import { useCategories } from "../../context/CategoriesContext";
 
 export default function TaskDetailsPanel({ task, onClose }) {
+  const { categories, setCategories } = useCategories();
   const { tasks, setTasks } = useTasks();
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState("");
@@ -95,15 +97,22 @@ export default function TaskDetailsPanel({ task, onClose }) {
     onClose();
   };
 
-  // Editar el nombre de la tarea
-  //const handleTitleSubmit = (e) => {
-  //  e.preventDefault();
-  //  if (!editedTitle.trim()) return;
-  //  const updatedTasks = tasks.map((t) =>
-  //    t.id === task.id ? { ...t, title:editedTitle } : t
-  //  );
-  //  setTasks(updatedTasks);
-  //};
+  // Funcion para eliminar la categoria y sus tareas
+  const handleDeleteCategory = () => {
+    if (!task?.categoryId) return;
+
+    // Eliminar la categoria
+    const updateCategories = categories.filter(
+      (cat) => cat.id !== task.categoryId
+    );
+    setCategories(updateCategories);
+
+    // Eliminar todas las tareas de la categoria
+    const updatedTasks = tasks.filter((t) => t.categoryId !== task.categoryId);
+    setTasks(updatedTasks);
+
+    onClose();
+  };
 
   return (
     <div className={styles.taskDetailsPanel}>
@@ -166,10 +175,19 @@ export default function TaskDetailsPanel({ task, onClose }) {
           placeholder="Agregar nota"
         />
       </div>
-      <button onClick={handleDeleteTask} className={styles.deleteBtn}>
-        Delete Task
-        <LiaTrashSolid className={styles.trashIcon} />
-      </button>
+      <div className={styles.deleteButtonsContainer}>
+        <button
+          onClick={handleDeleteCategory}
+          className={`${styles.deleteBtn} ${styles.deleteBtnCategory}`}
+        >
+          Delete Category
+        </button>
+
+        <button onClick={handleDeleteTask} className={styles.deleteBtn}>
+          Delete Task
+          <LiaTrashSolid className={styles.trashIcon} />
+        </button>
+      </div>
     </div>
   );
 }

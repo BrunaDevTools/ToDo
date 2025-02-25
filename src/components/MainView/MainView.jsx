@@ -8,22 +8,27 @@ import { LiaEllipsisVSolid } from "react-icons/lia"; // Icono de tres puntos
 
 export default function MainView({
   selectedCategory,
+  setSelectedCategory,
   selectedNote,
   onTaskClick,
   onNoteClick,
 }) {
   const { tasks, setTasks } = useTasks();
   const { notes, setNotes } = useNotes();
+  const { categories, setCategories } = useCategories(); //
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [menuOpen, setMenuOpen] = useState(false); // Estado para controlar el menu
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
   const [currentAction, setCurrentAction] = useState(null); // Estado para controlar la acción actual (editar o eliminar)
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [currentCategoryAction, setCurrentCategoryAction] = useState(null);
   const menuRef = useRef(null); // Referencia para el menú
+  const taskInputRef = useRef(null); // Referencia del input de nueva tarea
 
   // Cerrar el menú al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      if (menuOpen && menuRef.current && !menuRef.current.contains(e.target)) {
         setMenuOpen(false);
       }
     };
@@ -32,7 +37,15 @@ export default function MainView({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [menuOpen]);
+
+  // Foco automatico en el input de nueva task
+  // Añade este efecto:
+  useEffect(() => {
+    if (selectedCategory) {
+      taskInputRef.current?.focus();
+    }
+  }, [selectedCategory]);
 
   // Funcion para abrir/cerrar el menu
   const toggleMenu = () => {
@@ -134,6 +147,44 @@ export default function MainView({
     setTasks(updatedTasks);
   };
 
+  // Funcion para eliminar categoria
+  const handleDeleteCategory = () => {
+    if (!selectedCategory) return;
+
+    // Eliminar categoría del contexto
+    const updatedCategories = categories.filter(
+      (cat) => cat.id !== selectedCategory.id
+    );
+    setCategories(updatedCategories);
+
+    // Eliminar tareas asociadas
+    const updatedTasks = tasks.filter(
+      (task) => task.categoryId !== selectedCategory.id
+    );
+    setTasks(updatedTasks);
+
+    // Resetear estados
+    setSelectedCategory(null);
+    setMenuOpen(false);
+    setIsCategoryModalOpen(false);
+  };
+
+  // Funcion para editar categoria
+  const handleEditCategory = (newName) => {
+    if (!newName || !selectedCategory) return;
+
+    const updatedCategories = categories.map((cat) =>
+      cat.id === selectedCategory.id ? { ...cat, name: newName } : cat
+    );
+    setCategories(updatedCategories);
+
+    // Actualizar selectedCategory localmente
+    const updatedCategory = { ...selectedCategory, name: newName };
+    setSelectedCategory(updatedCategory);
+    setIsCategoryModalOpen(false);
+    setMenuOpen(false);
+  };
+
   // Manejar el cambio en el contenido de la nota
   const handleNoteContentChange = (e) => {
     if (!selectedNote) return;
@@ -155,9 +206,47 @@ export default function MainView({
 
   return (
     <div className={styles.mainView}>
+      {/* CATEGORIAS */}
       {selectedCategory && (
         <>
-          <h1>{selectedCategory.name}</h1>
+          <div className={styles.categoryHeader}>
+            <h1>{selectedCategory.name}</h1>
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleMenu();
+                }}
+                className={styles.threeDotsButton}
+              >
+                <LiaEllipsisVSolid />
+              </button>
+              {menuOpen && (
+                <div ref={menuRef} className={styles.menu}>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentCategoryAction("edit");
+                      setIsCategoryModalOpen(true);
+                    }}
+                    className={styles.menuButton}
+                  >
+                    Editar nombre
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentCategoryAction("delete");
+                      setIsCategoryModalOpen(true);
+                    }}
+                    className={`${styles.menuButton} ${styles.deleteButton}`}
+                  >
+                    Eliminar Categoría
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
           <ul>
             {filteredTasks.map((task) => (
               <li
@@ -192,12 +281,13 @@ export default function MainView({
                 value={newTaskTitle}
                 onChange={handleInputChange}
                 placeholder="Add a new task..."
+                ref={taskInputRef}
               />
             </form>
           </div>
         </>
       )}
-
+      {/* NOTAS */}
       {/* Mostrar la nota seleccionada */}
       {selectedNote && (
         <div className={styles.noteContainer}>
@@ -214,7 +304,7 @@ export default function MainView({
                 <LiaEllipsisVSolid />
               </button>
               {menuOpen && (
-                <div className={styles.menu}>
+                <div ref={menuRef} className={styles.menu}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -269,6 +359,29 @@ export default function MainView({
         }
         placeholder={currentAction === "edit" ? "Nuevo nombre de la nota" : ""}
         showInput={currentAction === "edit"} // Mostrar input solo para editar
+      />
+
+      {/* Modal para categorias */}
+      <ModalForm
+        isOpen={isCategoryModalOpen}
+        onClose={() => {
+          setIsCategoryModalOpen(false);
+          setMenuOpen(false);
+        }}
+        onSubmit={
+          currentCategoryAction === "edit"
+            ? handleEditCategory
+            : currentCategoryAction === "delete"
+            ? handleDeleteCategory
+            : null
+        }
+        title={
+          currentCategoryAction === "edit"
+            ? "Editar nombre de la categoría"
+            : "¿Estás seguro de eliminar esta categoría?"
+        }
+        placeholder={currentCategoryAction === "edit" ? "Nuevo nombre" : ""}
+        showInput={currentCategoryAction === "edit"}
       />
 
       {/* Mostrar mensaje cuando no hay nada seleccionado */}
