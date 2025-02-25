@@ -109,7 +109,7 @@ export default function MainView({
     if (!newTaskTitle.trim()) return;
 
     const newTask = {
-      id: tasks.length + 1,
+      id: Date.now(),
       title: newTaskTitle,
       completed: false,
       categoryId: selectedCategory.id,
@@ -247,7 +247,7 @@ export default function MainView({
               )}
             </div>
           </div>
-          <ul>
+          <ul className={styles.tasksContainer}>
             {filteredTasks.map((task) => (
               <li
                 key={task.id}

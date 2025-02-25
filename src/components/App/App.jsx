@@ -49,8 +49,8 @@ function App() {
   const handleAddCategory = (categoryName) => {
     if (!categoryName) return;
 
-    const newId =
-      categories.length > 0 ? Math.max(...categories.map((c) => c.id)) + 1 : 1;
+    const newId = Date.now();
+
     const newCategory = {
       id: newId,
       name: categoryName,
@@ -79,8 +79,7 @@ function App() {
   // Funcion para agregar una nueva nota
   const handleAddNote = (noteTitle) => {
     if (!noteTitle) return;
-    const newId =
-      notes.length > 0 ? Math.max(...notes.map((n) => n.id)) + 1 : 1;
+    const newId = Date.now();
     const newNote = {
       id: newId,
       title: noteTitle,
