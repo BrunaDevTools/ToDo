@@ -1,0 +1,78 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--background-body-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modalContent h2 {
+  margin-bottom: 20px;
+  color: var(--main-font-color);
+}
+
+.modalContent input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid var(--turquesa-claro);
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.uploadLabel {
+  display: block;
+  padding: 10px;
+  background: var(--turquesa-base);
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.avatarPreview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  object-fit: cover;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modalActions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modalActions button:first-child {
+  background: var(--button-cancel);
+  color: white;
+}
+
+.modalActions button:last-child {
+  background: var(--turquesa-claro);
+  color: white;
+}

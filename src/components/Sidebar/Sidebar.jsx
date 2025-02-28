@@ -6,17 +6,23 @@ import { useState } from "react";
 import { useMemo } from "react";
 import NoteList from "./Notes/NoteList";
 import styles from "./Sidebar.module.css";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import { LiaEditSolid } from "react-icons/lia";
 
 export default function Sidebar({
+  userName,
+  userAvatar,
   categories,
   notes,
   selectedNote,
+  onEditProfile,
   onCategoryClick,
   onNoteClick,
   onAddCategory,
   onAddNote,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   // Filtrar categorías y notas
   const filteredCategories = useMemo(
@@ -40,7 +46,28 @@ export default function Sidebar({
   return (
     <>
       <div className={styles.container}>
-        <UserName name="Bruna" avatar="./img/avatar.jpg" />
+        <div className={styles.profileSection}>
+          <UserName
+            name={userName || "Usuario"}
+            avatar={userAvatar || "./img/avatar-default.jpg"}
+          />
+          <button
+            onClick={() => setIsEditing(true)}
+            className={styles.editButton}
+          >
+            <LiaEditSolid />
+          </button>
+        </div>
+        {/* Mostrar el modal de edicion */}
+        {isEditing && (
+          <EditProfileModal
+            onClose={() => setIsEditing(false)}
+            onSave={(newInfo) => {
+              onEditProfile(newInfo); // Actualiza el perfil
+              setIsEditing(false);
+            }}
+          />
+        )}
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
         <div className={styles.categoriesAndTasksContainer}>
           <CategoriesList

@@ -8,6 +8,8 @@ import TaskDetailsPanel from "../TaskDetailsPanel/TaskDetailsPanel";
 import { useCategories } from "../../context/CategoriesContext";
 import { useTasks } from "../../context/TasksContext";
 import { useNotes, NotesProvider } from "../../context/NotesContext";
+import { UserProvider, useUser } from "../../context/UserContext";
+import SetupScreen from "../../components/SetupScreen/SetupScreen";
 import ModalForm from "../ModalForm/ModalForm";
 
 function App() {
@@ -22,6 +24,17 @@ function App() {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showNoteModal, setShowNoteModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { userInfo, updateUserInfo } = useUser();
+  const [hasCompletedSetup, setHasCompletedSetup] = useState(
+    localStorage.getItem("hasCompletedSetup") === "true"
+  );
+
+  // Inicio de sesion
+  const handleSetupComplete = (userData) => {
+    setHasCompletedSetup(true);
+    localStorage.setItem("hasCompletedSetup", "true");
+  };
+
   // Funcion para selecionar una categoria
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -95,57 +108,64 @@ function App() {
 
   return (
     <>
-      <div
-        className={`${styles.mainContainer} ${
-          isDetailsOpen ? styles.mainContainerWithDetails : ""
-        }`}
-      >
-        <Sidebar
-          categories={categories}
-          tasks={tasks}
-          notes={notes}
-          selectedNote={selectedNote}
-          onCategoryClick={handleCategoryClick}
-          onTaskClick={handleTaskClick}
-          onNoteClick={handleNoteClick}
-          onAddCategory={() => setShowCategoryModal(true)}
-          onAddNote={() => setShowNoteModal(true)}
-        />
-        <ModalForm
-          isOpen={showCategoryModal}
-          onClose={() => {
-            setShowCategoryModal(false);
-            setMenuOpen(false);
-          }}
-          onSubmit={handleAddCategory}
-          title="New category"
-          placeholder="Category name..."
-        />
-        <ModalForm
-          isOpen={showNoteModal}
-          onClose={() => {
-            setShowNoteModal(false);
-            setMenuOpen(false);
-          }}
-          onSubmit={handleAddNote}
-          title="New Note"
-          placeholder="Note title..."
-        />
-        <MainView
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedTask={selectedTask}
-          selectedNote={selectedNote}
-          onTaskClick={handleTaskClick}
-          onNoteClick={handleNoteClick}
-        />
-        {isDetailsOpen && (
-          <TaskDetailsPanel
-            task={selectedTask}
-            onClose={() => setIsDetailsOpen(false)}
+      {!hasCompletedSetup ? (
+        <SetupScreen onComplete={handleSetupComplete} />
+      ) : (
+        <div
+          className={`${styles.mainContainer} ${
+            isDetailsOpen ? styles.mainContainerWithDetails : ""
+          }`}
+        >
+          <Sidebar
+            userName={userInfo.name}
+            userAvatar={userInfo.avatar}
+            categories={categories}
+            tasks={tasks}
+            notes={notes}
+            selectedNote={selectedNote}
+            onEditProfile={updateUserInfo}
+            onCategoryClick={handleCategoryClick}
+            onTaskClick={handleTaskClick}
+            onNoteClick={handleNoteClick}
+            onAddCategory={() => setShowCategoryModal(true)}
+            onAddNote={() => setShowNoteModal(true)}
           />
-        )}
-      </div>
+          <ModalForm
+            isOpen={showCategoryModal}
+            onClose={() => {
+              setShowCategoryModal(false);
+              setMenuOpen(false);
+            }}
+            onSubmit={handleAddCategory}
+            title="New category"
+            placeholder="Category name..."
+          />
+          <ModalForm
+            isOpen={showNoteModal}
+            onClose={() => {
+              setShowNoteModal(false);
+              setMenuOpen(false);
+            }}
+            onSubmit={handleAddNote}
+            title="New Note"
+            placeholder="Note title..."
+          />
+          <MainView
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedTask={selectedTask}
+            selectedNote={selectedNote}
+            onTaskClick={handleTaskClick}
+            onNoteClick={handleNoteClick}
+          />
+          {isDetailsOpen && (
+            <TaskDetailsPanel
+              task={selectedTask}
+              onClose={() => setIsDetailsOpen(false)}
+            />
+          )}
+        </div>
+      )}
     </>
   );
 }

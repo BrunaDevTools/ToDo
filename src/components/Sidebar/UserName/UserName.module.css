@@ -11,6 +11,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  border: 1px solid var(--turquesa-claro);
 }
 
 .username {
@@ -19,4 +20,8 @@
   font-weight: bold;
   letter-spacing: 1.2px;
   color: var(--main-font-color);
+  white-space: nowrap; /* Evita salto de línea */
+  overflow: hidden; /* Oculta texto largo */
+  text-overflow: ellipsis;
+  max-width: 150px;
 }

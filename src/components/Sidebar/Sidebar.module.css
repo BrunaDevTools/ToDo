@@ -7,6 +7,30 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Boton de edicion de nombre de usuario y imagen */
+.profileSection {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  color: var(--turquesa-claro); /* Color del ícono */
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  transition: color 0.2s ease;
+}
+
+.editButton:hover {
+  color: var(--turquesa-base); /* Cambia el color al hacer hover */
+}
+
 .categoriesAndTasksContainer {
   padding: 10px 0;
 }
