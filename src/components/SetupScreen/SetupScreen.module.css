@@ -1,0 +1,31 @@
+.setupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--background-body-color);
+}
+
+.setupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+}
+
+.avatarUpload {
+  padding: 10px;
+  background: var(--turquesa-base);
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.avatarPreview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto;
+}

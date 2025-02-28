@@ -1,14 +1,22 @@
 import { useState } from "react";
 import styles from "./SetupScreen.module.css";
+import { useUser } from "../../context/UserContext";
+
+const defaultAvatar = "/default-avatar.png"; // Imagen por defecto
 
 export default function SetupScreen({ onComplete }) {
+  const { updateUserInfo } = useUser();
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!userName) return; // Validación básica
-    onComplete({ name: userName, avatar });
+    const newUser = {
+      name: userName.trim() || "Usuario",
+      avatar: avatar || defaultAvatar,
+    };
+    updateUserInfo(newUser);
+    onComplete(newUser);
   };
 
   const handleImageUpload = (e) => {
@@ -29,7 +37,6 @@ export default function SetupScreen({ onComplete }) {
           placeholder="Enter your name"
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
-          required
         />
         <label className={styles.avatarUpload}>
           Choose Profile Image
@@ -40,9 +47,11 @@ export default function SetupScreen({ onComplete }) {
             hidden
           />
         </label>
-        {avatar && (
-          <img src={avatar} alt="Preview" className={styles.avatarPreview} />
-        )}
+        <img
+          src={avatar || defaultAvatar}
+          alt="Preview"
+          className={styles.avatarPreview}
+        />
         <button type="submit">Continue</button>
       </form>
     </div>

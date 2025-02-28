@@ -25,6 +25,17 @@
   color: var(--main-font-color);
 }
 
+/* Imagen recortada */
+.ReactCrop {
+  margin: 15px 0;
+}
+
+.ReactCrop__image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
 .modalContent input[type="text"] {
   width: 100%;
   padding: 10px;

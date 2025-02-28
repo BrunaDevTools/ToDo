@@ -7,7 +7,51 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.menuContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.userMenu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.userMenu button {
+  background: none;
+  border: none;
+  padding: 8px 12px; /* Espaciado interno */
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; /* Oculta el desbordamiento */
+  text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
+}
+.userMenu button:hover {
+  background-color: #f0f0f0;
+}
+
+.resetUserBtn {
+  color: red;
+}
+
 /* Boton de edicion de nombre de usuario y imagen */
+.buttonsUserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .profileSection {
   display: flex;
   align-items: flex-start;

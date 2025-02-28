@@ -35,6 +35,13 @@ function App() {
     localStorage.setItem("hasCompletedSetup", "true");
   };
 
+  // Receteo de sesion
+  const handleUserReset = () => {
+    localStorage.removeItem("hasCompletedSetup");
+    localStorage.removeItem("userInfo");
+    setHasCompletedSetup(false);
+  };
+
   // Funcion para selecionar una categoria
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -124,6 +131,7 @@ function App() {
             notes={notes}
             selectedNote={selectedNote}
             onEditProfile={updateUserInfo}
+            onUserReset={handleUserReset}
             onCategoryClick={handleCategoryClick}
             onTaskClick={handleTaskClick}
             onNoteClick={handleNoteClick}
