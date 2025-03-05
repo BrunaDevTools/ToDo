@@ -1,31 +1,196 @@
-.setupContainer {
+.containerInicio {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: var(--background-body-color);
+  background-color: var(--background-body-color);
+  background-image: url("../../../public/img/cielo.jpg");
+  background-size: cover;
+}
+
+.logoBM {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.logoBM img {
+  width: 70px;
+  margin-right: auto;
+  align-self: flex-start;
+}
+
+.setupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh;
+  background: rgba(255, 255, 255, 0.381); /* Fondo con transparencia */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.setupContainer h1 {
+  font-size: 2.5rem;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .setupForm {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
-  width: 300px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.setupForm input[type="text"] {
+  width: 90%;
+  padding: 12px;
+  border: 2px solid var(--turquesa-claro);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  color: var(--main-font-color);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.setupForm input[type="text"]:focus {
+  border-color: var(--turquesa-base);
+  box-shadow: 0 0 8px var(--turquesa-claro);
+  outline: none;
 }
 
 .avatarUpload {
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 200px;
+  padding: 7px;
   background: var(--turquesa-base);
+  font-size: 0.9rem;
   color: white;
-  text-align: center;
-  cursor: pointer;
   border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.avatarUpload:hover {
+  background: var(--turquesa-claro);
 }
 
 .avatarPreview {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--turquesa-claro);
   margin: 0 auto;
+  display: block;
+}
+
+.cropContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none; /* Permite interactuar con los elementos debajo */
+}
+
+.cropContainer img {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: 0 auto;
+}
+/* .setupForm button {
+  padding: 12px;
+  background: var(--turquesa-base);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+} 
+
+.setupForm button:hover {
+  background: var(--turquesa-claro);
+} */
+
+.btnContinue {
+  margin-top: auto;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: font-size 0.3s ease;
+}
+
+.btnContinue:hover {
+  font-size: 1rem;
+}
+
+.cropModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cropModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cropModalContent button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: var(--turquesa-base);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cropModalContent button:hover {
+  background: var(--turquesa-claro);
+}
+
+.cropInstruction {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
 }
