@@ -120,20 +120,6 @@
   display: block;
   margin: 0 auto;
 }
-/* .setupForm button {
-  padding: 12px;
-  background: var(--turquesa-base);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-} 
-
-.setupForm button:hover {
-  background: var(--turquesa-claro);
-} */
 
 .btnContinue {
   margin-top: auto;
@@ -193,4 +179,69 @@
   color: #333;
   margin-bottom: 15px;
   text-align: center;
+}
+
+/* Media Queries para pantallas grandes (más grandes que notebooks) */
+@media (min-width: 1200px) {
+  .setupContainer {
+    max-width: 500px; /* Aumentamos el ancho máximo */
+  }
+
+  .setupContainer h1 {
+    font-size: 3rem; /* Aumentamos el tamaño del título */
+  }
+
+  .setupForm input[type="text"] {
+    font-size: 1.1rem; /* Aumentamos el tamaño de la fuente */
+  }
+
+  .avatarPreview {
+    width: 120px; /* Aumentamos el tamaño del avatar */
+    height: 120px;
+  }
+
+  .btnContinue {
+    font-size: 1rem; /* Aumentamos el tamaño del botón */
+  }
+}
+
+/* Media Queries para pantallas pequeñas (celulares) */
+@media (max-width: 480px) {
+  .setupContainer {
+    min-height: 60vh; /* Reducimos la altura mínima */
+    padding: 15px; /* Reducimos el padding */
+    max-width: 90%; /* Ajustamos el ancho máximo */
+  }
+
+  .setupContainer h1 {
+    font-size: 2rem; /* Reducimos el tamaño del título */
+  }
+
+  .setupForm input[type="text"] {
+    font-size: 0.9rem; /* Reducimos el tamaño de la fuente */
+    padding: 10px; /* Reducimos el padding */
+  }
+
+  .avatarPreview {
+    width: 80px; /* Reducimos el tamaño del avatar */
+    height: 80px;
+  }
+
+  .avatarUpload {
+    font-size: 0.8rem; /* Reducimos el tamaño de la fuente */
+    padding: 5px; /* Reducimos el padding */
+  }
+
+  .btnContinue {
+    font-size: 0.8rem; /* Reducimos el tamaño del botón */
+    padding: 10px; /* Reducimos el padding */
+  }
+
+  .cropModalContent {
+    padding: 15px; /* Reducimos el padding del modal */
+  }
+
+  .cropInstruction {
+    font-size: 0.9rem; /* Reducimos el tamaño de la fuente */
+  }
 }

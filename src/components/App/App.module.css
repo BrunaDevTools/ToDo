@@ -16,3 +16,15 @@
 .mainContainerWithDetails {
   grid-template-columns: 20% 60% 20%;
 }
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+  .mainContainer {
+    grid-template-columns: 100%; /* Ocupar toda la pantalla */
+    padding: 5px 10px; /* Reducir padding */
+  }
+
+  .mainContainerWithDetails {
+    grid-template-columns: 100%; /* Ocupar toda la pantalla */
+  }
+}

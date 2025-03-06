@@ -3,6 +3,7 @@ import { LiaTrashSolid, LiaWindowCloseSolid } from "react-icons/lia";
 import { useState, useEffect, useRef } from "react";
 import { useTasks } from "../../context/TasksContext";
 import { useCategories } from "../../context/CategoriesContext";
+import { useMediaQuery } from "react-responsive"; // Para detectar el tamaño de la pantalla
 
 export default function TaskDetailsPanel({ task, onClose }) {
   const { categories, setCategories } = useCategories();
@@ -10,21 +11,30 @@ export default function TaskDetailsPanel({ task, onClose }) {
   const [steps, setSteps] = useState([]);
   const [newStep, setNewStep] = useState("");
   const [notes, setNotes] = useState("");
-  const [editedTitle, setEditedTitle] = useState(task.title);
+  const [editedTitle, setEditedTitle] = useState(task ? task.title : "");
+
+  // Detectar si la pantalla es pequeña (menos de 768px de ancho)
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   // Referencia (useRef) para el focus en inputTask
   const inputRef = useRef(null);
 
   // Sincronizo el estado interno para cambiar de task
   useEffect(() => {
-    setEditedTitle(task.title);
-    setSteps(task.steps || []);
-    setNotes(task.notes || "");
-
-    inputRef.current?.focus(); //Hace focus cuando el componente se monta
+    if (task) {
+      setEditedTitle(task.title);
+      setSteps(task.steps || []);
+      setNotes(task.notes || "");
+      inputRef.current?.focus(); // Hace focus cuando el componente se monta
+    }
   }, [task]);
 
-  // Guardar el titulo cuando el susuario presiona enter o cambia de foco
+  // Si task es null, no renderizar el componente
+  if (!task) {
+    return null;
+  }
+
+  // Guardar el título cuando el usuario presiona enter o cambia de foco
   const handleTitleSubmit = (e) => {
     e.preventDefault();
     if (!editedTitle.trim()) return;
@@ -79,7 +89,7 @@ export default function TaskDetailsPanel({ task, onClose }) {
     setTasks(updatedTasks);
   };
 
-  // Funcion para eliminar un paso
+  // Función para eliminar un paso
   const handleDeleteStep = (stepId) => {
     const updatedSteps = steps.filter((step) => step.id !== stepId);
     setSteps(updatedSteps);
@@ -97,17 +107,17 @@ export default function TaskDetailsPanel({ task, onClose }) {
     onClose();
   };
 
-  // Funcion para eliminar la categoria y sus tareas
+  // Función para eliminar la categoría y sus tareas
   const handleDeleteCategory = () => {
     if (!task?.categoryId) return;
 
-    // Eliminar la categoria
+    // Eliminar la categoría
     const updateCategories = categories.filter(
       (cat) => cat.id !== task.categoryId
     );
     setCategories(updateCategories);
 
-    // Eliminar todas las tareas de la categoria
+    // Eliminar todas las tareas de la categoría
     const updatedTasks = tasks.filter((t) => t.categoryId !== task.categoryId);
     setTasks(updatedTasks);
 
@@ -115,7 +125,11 @@ export default function TaskDetailsPanel({ task, onClose }) {
   };
 
   return (
-    <div className={styles.taskDetailsPanel}>
+    <div
+      className={`${styles.taskDetailsPanel} ${
+        isMobile ? styles.mobileView : ""
+      }`}
+    >
       <button onClick={onClose} className={styles.closeButton}>
         <LiaWindowCloseSolid className={styles.closeIcon} />
       </button>

@@ -11,14 +11,13 @@ import { useNotes, NotesProvider } from "../../context/NotesContext";
 import { UserProvider, useUser } from "../../context/UserContext";
 import SetupScreen from "../../components/SetupScreen/SetupScreen";
 import ModalForm from "../ModalForm/ModalForm";
+import { useMediaQuery } from "react-responsive"; // Importar useMediaQuery
 
 function App() {
-  // Contextos para categorias, tareas y notas
   const { selectedCategory, setSelectedCategory, categories, setCategories } =
     useCategories();
   const { selectedTask, setSelectedTask, tasks, setTasks } = useTasks();
   const { notes, setNotes, addNote } = useNotes();
-  // Estados locales para controlar modales y nota seleccionada
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -29,48 +28,48 @@ function App() {
     localStorage.getItem("hasCompletedSetup") === "true"
   );
 
-  // Inicio de sesion
+  // Detectar si la pantalla es pequeña (menos de 768px de ancho)
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  // Estado para controlar la vista actual en móviles
+  const [currentView, setCurrentView] = useState("sidebar");
+
   const handleSetupComplete = (userData) => {
     setHasCompletedSetup(true);
     localStorage.setItem("hasCompletedSetup", "true");
   };
 
-  // Receteo de sesion
   const handleUserReset = () => {
     localStorage.removeItem("hasCompletedSetup");
     localStorage.removeItem("userInfo");
     setHasCompletedSetup(false);
   };
 
-  // Funcion para selecionar una categoria
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setSelectedTask(null);
     setSelectedNote(null);
     setIsDetailsOpen(false);
+    if (isMobile) setCurrentView("mainView"); // Cambiar a MainView en móviles
   };
 
-  // Funcion para seleccionar una tarea
   const handleTaskClick = (task) => {
     setSelectedTask(task);
     setIsDetailsOpen(true);
+    if (isMobile) setCurrentView("taskDetails"); // Cambiar a TaskDetailsPanel en móviles
   };
 
-  //Funcion para seleccionar una nota
   const handleNoteClick = (note) => {
-    console.log("NOTA seleccionada:", note); // Depuración
     setSelectedNote(note);
     setSelectedCategory(null);
     setSelectedTask(null);
     setIsDetailsOpen(false);
+    if (isMobile) setCurrentView("mainView"); // Cambiar a MainView en móviles
   };
 
-  // Funcion para agregar una nueva categoria
   const handleAddCategory = (categoryName) => {
     if (!categoryName) return;
-
     const newId = Date.now();
-
     const newCategory = {
       id: newId,
       name: categoryName,
@@ -82,10 +81,8 @@ function App() {
     setSelectedCategory(newCategory);
   };
 
-  // Funcion para agregar nueva tarea
   const handleAddTask = (taskTitle) => {
     if (!taskTitle) return;
-
     const newId =
       tasks.length > 0 ? Math.max(...tasks.map((t) => t.id)) + 1 : 1;
     const newTask = {
@@ -96,7 +93,6 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
-  // Funcion para agregar una nueva nota
   const handleAddNote = (noteTitle) => {
     if (!noteTitle) return;
     const newId = Date.now();
@@ -107,10 +103,18 @@ function App() {
       dateCreated: new Date().toISOString(),
     };
     setNotes([...notes, newNote]);
-    // Selecciona la nota recien creada para mostrarla en MainView
     setSelectedNote(newNote);
     setSelectedCategory(null);
     setIsDetailsOpen(false);
+  };
+
+  // Función para manejar el botón de "volver atrás"
+  const handleBack = () => {
+    if (currentView === "mainView") {
+      setCurrentView("sidebar"); // Volver al Sidebar
+    } else if (currentView === "taskDetails") {
+      setCurrentView("mainView"); // Volver al MainView
+    }
   };
 
   return (
@@ -123,21 +127,50 @@ function App() {
             isDetailsOpen ? styles.mainContainerWithDetails : ""
           }`}
         >
-          <Sidebar
-            userName={userInfo.name}
-            userAvatar={userInfo.avatar}
-            categories={categories}
-            tasks={tasks}
-            notes={notes}
-            selectedNote={selectedNote}
-            onEditProfile={updateUserInfo}
-            onUserReset={handleUserReset}
-            onCategoryClick={handleCategoryClick}
-            onTaskClick={handleTaskClick}
-            onNoteClick={handleNoteClick}
-            onAddCategory={() => setShowCategoryModal(true)}
-            onAddNote={() => setShowNoteModal(true)}
-          />
+          {/* Mostrar Sidebar si no es móvil o si la vista actual es "sidebar" */}
+          {(!isMobile || currentView === "sidebar") && (
+            <Sidebar
+              userName={userInfo.name}
+              userAvatar={userInfo.avatar}
+              categories={categories}
+              tasks={tasks}
+              notes={notes}
+              selectedNote={selectedNote}
+              onEditProfile={updateUserInfo}
+              onUserReset={handleUserReset}
+              onCategoryClick={handleCategoryClick}
+              onTaskClick={handleTaskClick}
+              onNoteClick={handleNoteClick}
+              onAddCategory={() => setShowCategoryModal(true)}
+              onAddNote={() => setShowNoteModal(true)}
+            />
+          )}
+
+          {/* Mostrar MainView si no es móvil o si la vista actual es "mainView" */}
+          {(!isMobile || currentView === "mainView") && (
+            <MainView
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedTask={selectedTask}
+              selectedNote={selectedNote}
+              onTaskClick={handleTaskClick}
+              onNoteClick={handleNoteClick}
+              onBack={isMobile ? handleBack : null} // Mostrar botón de "volver" solo en móviles
+            />
+          )}
+
+          {/* Mostrar TaskDetailsPanel si no es móvil o si la vista actual es "taskDetails" */}
+          {(!isMobile || currentView === "taskDetails") && (
+            <TaskDetailsPanel
+              task={selectedTask}
+              onClose={() => {
+                setIsDetailsOpen(false);
+                if (isMobile) setCurrentView("mainView"); // Volver a MainView en móviles
+              }}
+            />
+          )}
+
+          {/* Modales para agregar categorías y notas */}
           <ModalForm
             isOpen={showCategoryModal}
             onClose={() => {
@@ -158,20 +191,6 @@ function App() {
             title="New Note"
             placeholder="Note title..."
           />
-          <MainView
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            selectedTask={selectedTask}
-            selectedNote={selectedNote}
-            onTaskClick={handleTaskClick}
-            onNoteClick={handleNoteClick}
-          />
-          {isDetailsOpen && (
-            <TaskDetailsPanel
-              task={selectedTask}
-              onClose={() => setIsDetailsOpen(false)}
-            />
-          )}
         </div>
       )}
     </>

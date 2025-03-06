@@ -5,6 +5,8 @@ import { useNotes } from "../../context/NotesContext";
 import { useState, useEffect, useRef } from "react";
 import ModalForm from "../ModalForm/ModalForm";
 import { LiaEllipsisVSolid } from "react-icons/lia"; // Icono de tres puntos
+import { useMediaQuery } from "react-responsive"; // Para detectar el tamaño de la pantalla
+import { FaArrowLeft } from "react-icons/fa"; // Icono de flecha para el botón de volver
 
 export default function MainView({
   selectedCategory,
@@ -12,6 +14,7 @@ export default function MainView({
   selectedNote,
   onTaskClick,
   onNoteClick,
+  onBack, // Prop para manejar el botón de volver
 }) {
   const { tasks, setTasks } = useTasks();
   const { notes, setNotes } = useNotes();
@@ -24,6 +27,9 @@ export default function MainView({
   const [currentCategoryAction, setCurrentCategoryAction] = useState(null);
   const menuRef = useRef(null); // Referencia para el menú
   const taskInputRef = useRef(null); // Referencia del input de nueva tarea
+
+  // Detectar si la pantalla es pequeña (menos de 768px de ancho)
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   // Cerrar el menú al hacer clic fuera
   useEffect(() => {
@@ -40,7 +46,6 @@ export default function MainView({
   }, [menuOpen]);
 
   // Foco automatico en el input de nueva task
-  // Añade este efecto:
   useEffect(() => {
     if (selectedCategory) {
       taskInputRef.current?.focus();
@@ -206,6 +211,13 @@ export default function MainView({
 
   return (
     <div className={styles.mainView}>
+      {/* Botón de volver atrás (solo en móviles) */}
+      {isMobile && (
+        <button onClick={onBack} className={styles.backButton}>
+          <FaArrowLeft /> {/* Icono de flecha */}
+        </button>
+      )}
+
       {/* CATEGORIAS */}
       {selectedCategory && (
         <>
@@ -249,20 +261,26 @@ export default function MainView({
           </div>
           <ul className={styles.tasksContainer}>
             {filteredTasks.map((task) => (
-              <li
-                key={task.id}
-                onClick={() => onTaskClick(task)}
-                className={styles.taskItem}
-              >
+              <li key={task.id} className={styles.taskItem}>
                 <input
                   type="checkbox"
                   className={styles.taskCheckbox}
                   checked={task.completed}
-                  onChange={() => handleTaskCompletion(task.id)}
+                  onChange={(e) => {
+                    e.stopPropagation(); // Evitar que el clic se propague al contenedor
+                    handleTaskCompletion(task.id);
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                 />
+                {/* Título de la tarea (abre TaskDetailsPanel) */}
                 <span
+                  onClick={(e) => {
+                    e.stopPropagation(); // Evitar que el clic se propague al contenedor
+                    onTaskClick(task); // Abrir TaskDetailsPanel al hacer clic en el título
+                  }}
                   style={{
                     textDecoration: task.completed ? "line-through" : "none",
+                    cursor: "pointer", // Cambiar el cursor a pointer para indicar que es clickeable
                   }}
                 >
                   {task.title}
@@ -287,8 +305,8 @@ export default function MainView({
           </div>
         </>
       )}
+
       {/* NOTAS */}
-      {/* Mostrar la nota seleccionada */}
       {selectedNote && (
         <div className={styles.noteContainer}>
           <div className={styles.noteHeader}>

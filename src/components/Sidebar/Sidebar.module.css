@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   background-color: var(--background-body-color);
-  padding: 15px 10px 10px 10px;
+  padding: 15px 15px 10px 15px; /* Aumentamos el padding izquierdo */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -26,17 +26,19 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
+
 .userMenu button {
   background: none;
   border: none;
-  padding: 8px 12px; /* Espaciado interno */
+  padding: 8px 12px;
   cursor: pointer;
   text-align: center;
   width: 100%;
-  white-space: nowrap; /* Evita el salto de línea */
-  overflow: hidden; /* Oculta el desbordamiento */
-  text-overflow: ellipsis; /* Agrega "..." si el texto es demasiado largo */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .userMenu button:hover {
   background-color: #f0f0f0;
 }
@@ -45,24 +47,17 @@
   color: red;
 }
 
-/* Boton de edicion de nombre de usuario y imagen */
-.buttonsUserContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .profileSection {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center; /* Alinear verticalmente la imagen y el botón */
+  justify-content: space-between; /* Espacio entre la imagen y el botón */
   margin-bottom: 10px;
 }
 
 .editButton {
   background: none;
   border: none;
-  color: var(--turquesa-claro); /* Color del ícono */
+  color: var(--turquesa-claro);
   cursor: pointer;
   font-size: 1.5rem;
   display: flex;
@@ -72,11 +67,12 @@
 }
 
 .editButton:hover {
-  color: var(--turquesa-base); /* Cambia el color al hacer hover */
+  color: var(--turquesa-base);
 }
 
 .categoriesAndTasksContainer {
   padding: 10px 0;
+  padding-left: 10px; /* Añadir más espacio a la izquierda */
 }
 
 .categoryContainer,
@@ -84,34 +80,34 @@
   max-height: 250px;
   overflow-y: auto;
   margin-bottom: 20px;
-  padding-right: 10px; /* Espacio para el scroll */
+  padding-right: 10px;
 }
 
 .categoryContainer:hover,
 .taskContainer:hover {
   overflow-y: auto;
 }
-/* Estilos a la barra de scroll */
+
 .categoryContainer::-webkit-scrollbar,
 .taskContainer::-webkit-scrollbar {
-  width: 4px; /* Ancho de la barra de scroll */
+  width: 4px;
 }
 
 .categoryContainer::-webkit-scrollbar-track,
 .taskContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color de fondo de la barra */
+  background: #f1f1f1;
   border-radius: 4px;
 }
 
 .categoryContainer::-webkit-scrollbar-thumb,
 .taskContainer::-webkit-scrollbar-thumb {
-  background: #888; /* Color de la barra */
+  background: #888;
   border-radius: 4px;
 }
 
 .categoryContainer::-webkit-scrollbar-thumb:hover,
 .taskContainer::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color al pasar el mouse */
+  background: #555;
 }
 
 .buttonsContainer {
@@ -138,4 +134,77 @@
 .addButton:hover {
   background-color: var(--button-hover-bg-color);
   transform: scale(1.02);
+}
+
+/* Media Queries para pantallas grandes (más grandes que notebooks) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 300px; /* Limitar el ancho máximo */
+  }
+
+  .userMenu {
+    top: 50px; /* Ajustar posición del menú */
+  }
+
+  .editButton {
+    font-size: 1.8rem; /* Aumentar tamaño del ícono */
+  }
+
+  .addButton {
+    font-size: 1rem; /* Aumentar tamaño del texto */
+  }
+}
+
+/* Media Queries para pantallas pequeñas (celulares) */
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Ocupar toda la pantalla */
+    padding: 15px; /* Aumentar el padding general */
+  }
+
+  .profileSection {
+    flex-direction: row; /* Mantener la imagen y el botón en línea */
+    align-items: center; /* Alinear verticalmente */
+    gap: 10px; /* Espaciado entre elementos */
+    margin-bottom: 15px; /* Aumentar el margen inferior */
+  }
+
+  .userMenu {
+    top: 60px; /* Ajustar posición del menú */
+    right: 10px;
+  }
+
+  .editButton {
+    font-size: 1.5rem; /* Mantener el tamaño del ícono */
+  }
+
+  .categoriesAndTasksContainer {
+    padding: 10px 0; /* Aumentar el padding vertical */
+    padding-left: 15px; /* Aumentar el padding izquierdo */
+  }
+
+  .categoryContainer,
+  .taskContainer {
+    max-height: 200px; /* Reducir altura máxima */
+  }
+
+  .addButton {
+    min-height: 40px; /* Reducir altura del botón */
+    font-size: 0.8rem; /* Reducir tamaño del texto */
+    padding: 8px 12px; /* Reducir padding */
+  }
+
+  .usernameContainer {
+    gap: 5px; /* Reducir espaciado */
+  }
+
+  .avatar {
+    width: 40px; /* Reducir tamaño del avatar */
+    height: 40px;
+  }
+
+  .username {
+    font-size: 1rem; /* Reducir tamaño del texto */
+    max-width: 120px; /* Reducir ancho máximo */
+  }
 }

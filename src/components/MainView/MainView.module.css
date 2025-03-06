@@ -44,6 +44,7 @@
   border-radius: 50%;
   background-color: var(--background-body-color);
   transition: background-color 0.2s;
+  position: relative;
 }
 
 .threeDotsButton:hover {
@@ -61,22 +62,33 @@
 
 .menu {
   display: flex;
-  gap: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  flex-direction: column; /* Cambiamos a columna */
+  gap: 5px; /* Espaciado entre elementos */
+  position: absolute; /* Posición absoluta para el menú */
+  top: 100%; /* Se coloca debajo del botón */
+  right: 0; /* Alineado a la derecha */
+  background-color: var(--background-body-color);
+  border: 1px solid var(--turquesa-claro);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el menú */
 }
 
+/* Botones del menú */
 .menuButton {
   display: flex;
-  align-items: end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-start; /* Alineación a la izquierda */
   color: var(--main-font-color);
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: var(--background-body-color);
-  border-radius: 8px;
+  background-color: transparent;
   font-size: 0.9rem;
+  padding: 8px 12px; /* Padding para los botones */
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 .menuButton:hover {
   font-weight: bold;
@@ -275,4 +287,27 @@
 .noteTextarea::-webkit-scrollbar-thumb {
   background: var(--turquesa-claro);
   border-radius: 4px;
+}
+
+/* Botón de volver atrás */
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: var(--background-body-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: var(--hover-claro-bg-body);
+}
+
+.backButton svg {
+  font-size: 1.2rem;
+  color: var(--main-font-color);
 }
