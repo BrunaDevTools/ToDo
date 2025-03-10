@@ -23,7 +23,7 @@ export default function NoteList({
                 selectedNote?.id === note.id ? "4px solid #01b0c4" : "none",
             }}
           >
-            <span>{note.title}</span>
+            <span style={{ marginLeft: "10px" }}>{note.title}</span>
           </li>
         ))}
       </ul>

@@ -71,13 +71,17 @@
 }
 
 .categoriesAndTasksContainer {
-  padding: 10px 0;
-  padding-left: 10px; /* Añadir más espacio a la izquierda */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
 }
 
 .categoryContainer,
 .taskContainer {
-  max-height: 250px;
+  max-height: 340px;
   overflow-y: auto;
   margin-bottom: 20px;
   padding-right: 10px;

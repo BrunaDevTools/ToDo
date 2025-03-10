@@ -13,7 +13,7 @@
 }
 
 .mainView {
-  padding: 40px 40px 10px 40px;
+  padding: 30px 33px 15px 33px;
   border: 1px solid var(--turquesa-claro);
   border-radius: 15px;
   background-color: var(--turquesa-base);
@@ -268,6 +268,7 @@
 
 .noteTextarea {
   padding: 20px;
+  margin-bottom: 16px;
   flex: 1; /* Ocupa todo el espacio restante */
   min-height: 150px;
   width: 100%;
@@ -289,17 +290,23 @@
   border-radius: 4px;
 }
 
+textarea {
+  margin: 20px 0;
+}
+
 /* Botón de volver atrás */
 .backButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  padding: 8px;
   background-color: var(--background-body-color);
   border: none;
-  border-radius: 8px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   transition: background-color 0.3s ease;
 }
 

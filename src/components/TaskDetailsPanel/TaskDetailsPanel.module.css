@@ -12,9 +12,9 @@
 
 /* Estilos para móviles */
 .taskDetailsPanel.mobileView {
-  width: 100%; /* Ocupar toda la pantalla */
-  border-left: none; /* Eliminar el borde izquierdo */
-  box-shadow: none; /* Eliminar la sombra */
+  width: 100%;
+  border-left: none;
+  box-shadow: none;
   padding: 10px; /* Reducir el padding */
 }
 
@@ -34,6 +34,7 @@
 .taskDetailsMain {
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-width: 0;
   flex-grow: 1;
   overflow: hidden; /* Evitar desbordamiento */
@@ -86,8 +87,8 @@ textarea:focus {
 
 .stepsContainer {
   margin-top: 10px;
-  min-height: 120px;
-  max-height: 200px; /* Reducir altura máxima */
+  min-height: 200px;
+  max-height: 300px; /* Reducir altura máxima */
   overflow-y: auto;
   padding: 10px;
 }
@@ -161,10 +162,12 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 /* Nota */
 textarea {
+  display: flex;
+  flex: 1;
   width: 100%;
-  min-height: 150px;
+  min-height: 200px;
   padding: 10px;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
   letter-spacing: 1.2px;
   border: 1px solid #e0e0e0;
