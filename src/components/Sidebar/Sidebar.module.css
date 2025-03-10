@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--background-body-color);
   padding: 15px 15px 10px 15px; /* Aumentamos el padding izquierdo */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
