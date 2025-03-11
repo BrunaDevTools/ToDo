@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css"; // Estilos de la librería
+import "react-image-crop/dist/ReactCrop.css";
 import styles from "./EditProfileModal.module.css";
 
 export default function EditProfileModal({
@@ -95,19 +95,25 @@ export default function EditProfileModal({
 
         {/* Vista previa de la imagen con recorte */}
         {src && (
-          <ReactCrop
-            src={src}
-            crop={crop}
-            onChange={(newCrop) => setCrop(newCrop)}
-            onComplete={handleCropComplete}
-          >
-            <img
-              ref={imgRef}
+          <div className={styles.cropContainer}>
+            <p>
+              Ajusta la imagen dentro del área de recorte y luego guarda los
+              cambios.
+            </p>
+            <ReactCrop
               src={src}
-              alt="Preview"
-              style={{ maxWidth: "100%", maxHeight: "300px" }}
-            />
-          </ReactCrop>
+              crop={crop}
+              onChange={(newCrop) => setCrop(newCrop)}
+              onComplete={handleCropComplete}
+            >
+              <img
+                ref={imgRef}
+                src={src}
+                alt="Preview"
+                style={{ maxWidth: "100%", maxHeight: "300px" }}
+              />
+            </ReactCrop>
+          </div>
         )}
 
         {/* Botones de acción */}

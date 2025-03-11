@@ -4,7 +4,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import styles from "./SetupScreen.module.css";
 import { useUser } from "../../context/UserContext";
 
-const defaultAvatar = "../../../public/img/Avatars.png"; // Imagen por defecto
+const defaultAvatar = "/avatars.png"; // Imagen por defecto
 
 export default function SetupScreen({ onComplete }) {
   const { updateUserInfo } = useUser();
@@ -74,7 +74,7 @@ export default function SetupScreen({ onComplete }) {
   return (
     <div className={styles.containerInicio}>
       <span className={styles.logoBM}>
-        <img src="../../../public/img/bmLogo.png" alt="logo" />
+        <img src="/bmlogo.png" alt="logo" />
       </span>
       <div className={styles.setupContainer}>
         <h1>TaskNotes</h1>

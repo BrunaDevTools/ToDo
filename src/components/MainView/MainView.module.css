@@ -104,7 +104,6 @@
 /* Titulo */
 .mainView h1 {
   color: white;
-  margin-bottom: 10px;
 }
 
 /* Tasks container */
@@ -256,7 +255,6 @@
 
 .titleNote {
   color: white;
-  margin-bottom: 10px;
   max-height: 60px; /* Máximo 3 líneas aprox */
   overflow: hidden;
   text-overflow: ellipsis;
