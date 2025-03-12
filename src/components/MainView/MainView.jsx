@@ -123,28 +123,27 @@ export default function MainView({
   let currentAudio = null; // Variable global para controlar el sonido
 
   const handleTaskCompletion = (taskId) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        const wasCompleted = task.completed;
-        const isNowCompleted = !task.completed;
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => {
+        if (task.id === taskId) {
+          const isNowCompleted = !task.completed;
 
-        if (!wasCompleted && isNowCompleted) {
-          if (currentAudio) {
-            currentAudio.pause(); // Detener el sonido actual
-            currentAudio.currentTime = 0; // Reiniciar el sonido
+          // Lógica del sonido
+          if (isNowCompleted) {
+            const audio = new Audio("/sounds/completadotask.mp3");
+            audio.volume = 0.7;
+
+            // Reproducir y manejar posible bloqueo de autoplay
+            audio.play().catch((error) => {
+              console.log("Audio bloqueado:", error);
+            });
           }
-          currentAudio = new Audio("/sounds/completadotask.mp3");
-          currentAudio.volume = 0.7;
-          currentAudio.play();
+
+          return { ...task, completed: isNowCompleted };
         }
-
-        return { ...task, completed: isNowCompleted };
-      }
-      return task;
-    });
-
-    setTasks(updatedTasks);
-    setRenderKey((prevKey) => prevKey + 1); // Forzar re-renderizado
+        return task;
+      })
+    );
   };
 
   // Funcion para eliminar categoria
@@ -265,7 +264,6 @@ export default function MainView({
                     e.stopPropagation(); // Evitar que el clic se propague al contenedor
                     handleTaskCompletion(task.id);
                   }}
-                  onClick={(e) => e.stopPropagation()}
                 />
                 {/* Título de la tarea (abre TaskDetailsPanel) */}
                 <span
@@ -273,6 +271,7 @@ export default function MainView({
                     e.stopPropagation(); // Evitar que el clic se propague al contenedor
                     onTaskClick(task); // Abrir TaskDetailsPanel al hacer clic en el título
                   }}
+                  onTouchStart={(e) => e.stopPropagation()} // Nuevo manejador para móviles
                   style={{
                     textDecoration: task.completed ? "line-through" : "none",
                     cursor: "pointer", // Cambiar el cursor a pointer para indicar que es clickeable
