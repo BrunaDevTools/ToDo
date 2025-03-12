@@ -32,6 +32,22 @@ export default function MainView({
   // Detectar si la pantalla es pequeña (menos de 768px de ancho)
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
+  // En tu componente MainView
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const container = document.querySelector(".tasksContainer");
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+      }
+    };
+
+    window.visualViewport?.addEventListener("resize", handleResize);
+    return () =>
+      window.visualViewport?.removeEventListener("resize", handleResize);
+  }, []);
+
   // Cerrar el menú al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (e) => {

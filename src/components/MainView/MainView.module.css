@@ -19,7 +19,7 @@
   background-color: var(--turquesa-base);
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -110,12 +110,13 @@
 .tasksContainer {
   flex: 1 1 auto;
   overflow-y: auto;
-  overflow-anchor: none;
+
   padding-bottom: 60px;
   scroll-behavior: smooth;
   margin: 10px 0;
   padding-right: 5px;
   max-height: calc(100vh - 200px);
+  scroll-padding-bottom: 100px; /* Prevenir corte al hacer scroll */
 }
 .tasksContainer::-webkit-scrollbar {
   width: 8px;
@@ -134,8 +135,8 @@
   /*flex-shrink: 0;
   margin-left: 0;
   margin-top: auto;
-  padding: 16px 16px 16px 0;
-  border-top: 1px solid var(--turquesa-claro); */
+  padding: 16px 16px 16px 0; */
+  border-top: 1px solid var(--turquesa-claro);
   position: sticky;
   bottom: 0;
   background: var(--turquesa-base);
@@ -329,21 +330,17 @@ textarea {
 /* Moviles */
 @media (max-width: 768px) {
   .mainView {
-    height: 100vh;
-    padding-bottom: env(
-      keyboard-inset-height,
-      0px
-    ); /* Nueva propiedad experimental */
+    padding: 15px; /* Reducir padding general */
+    min-height: 100vh;
+    height: auto !important;
+  }
+
+  .tasksContainer {
+    padding-bottom: 120px; /* Más espacio para input móvil */
   }
 
   .taskInputContainer {
-    padding-bottom: max(
-      16px,
-      env(safe-area-inset-bottom)
-    ); /* Considera el área segura */
-  }
-
-  .taskInput {
-    scroll-padding-bottom: 100px; /* Reserva espacio para el teclado */
+    padding: 16px 0 max(16px, env(safe-area-inset-bottom));
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombrear para mejor visibilidad */
   }
 }
