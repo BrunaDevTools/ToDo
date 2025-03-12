@@ -45,13 +45,6 @@ export default function MainView({
     };
   }, [menuOpen]);
 
-  // Foco automatico en el input de nueva task
-  useEffect(() => {
-    if (selectedCategory) {
-      taskInputRef.current?.focus();
-    }
-  }, [selectedCategory]);
-
   // Funcion para abrir/cerrar el menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -139,7 +132,7 @@ export default function MainView({
             currentAudio.pause(); // Detener el sonido actual
             currentAudio.currentTime = 0; // Reiniciar el sonido
           }
-          currentAudio = new Audio("../../public/sounds/completado.wav");
+          currentAudio = new Audio("/sounds/completadotask.mp3");
           currentAudio.volume = 0.7;
           currentAudio.play();
         }
