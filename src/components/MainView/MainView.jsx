@@ -311,15 +311,11 @@ export default function MainView({
                 placeholder="Add a new task..."
                 ref={taskInputRef}
                 onFocus={(e) => {
-                  setTimeout(() => {
-                    e.target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "center", // Para dispositivos grandes
-                    });
-                  }, 300); // Pequeño delay para asegurar que el teclado ya está visible
-                }}
-                onBlur={() => {
-                  window.scrollTo(0, 0);
+                  if (isMobile) {
+                    setTimeout(() => {
+                      window.scrollTo(0, document.body.scrollHeight);
+                    }, 300);
+                  }
                 }}
               />
             </form>

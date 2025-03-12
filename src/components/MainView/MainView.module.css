@@ -19,7 +19,7 @@
   background-color: var(--turquesa-base);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
 }
 
@@ -108,15 +108,11 @@
 
 /* Tasks container */
 .tasksContainer {
-  flex: 1 1 auto;
+  flex: 1;
   overflow-y: auto;
-
-  padding-bottom: 60px;
-  scroll-behavior: smooth;
   margin: 10px 0;
   padding-right: 5px;
-  max-height: calc(100vh - 200px);
-  scroll-padding-bottom: 100px; /* Prevenir corte al hacer scroll */
+  padding-bottom: 80px;
 }
 .tasksContainer::-webkit-scrollbar {
   width: 8px;
@@ -136,13 +132,13 @@
   margin-left: 0;
   margin-top: auto;
   padding: 16px 16px 16px 0; */
-  border-top: 1px solid var(--turquesa-claro);
-  position: sticky;
-  bottom: 0;
-  background: var(--turquesa-base);
-  padding: 16px 0;
-  z-index: 10;
+  flex-shrink: 0;
   margin-top: auto;
+  padding: 16px 16px 16px 0;
+  border-top: 1px solid var(--turquesa-claro);
+  position: relative;
+  z-index: 1;
+  background: var(--turquesa-base);
 }
 
 .taskInputContainer form {
@@ -330,17 +326,20 @@ textarea {
 /* Moviles */
 @media (max-width: 768px) {
   .mainView {
-    padding: 15px; /* Reducir padding general */
-    min-height: 100vh;
-    height: auto !important;
-  }
-
-  .tasksContainer {
-    padding-bottom: 120px; /* Más espacio para input móvil */
+    padding-bottom: 60px; /* Espacio seguro para el input */
   }
 
   .taskInputContainer {
-    padding: 16px 0 max(16px, env(safe-area-inset-bottom));
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombrear para mejor visibilidad */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    border-top: 1px solid var(--turquesa-claro);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .tasksContainer {
+    padding-bottom: 120px; /* Espacio extra para el input fijo */
   }
 }
