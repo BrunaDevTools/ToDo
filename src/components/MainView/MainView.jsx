@@ -27,6 +27,7 @@ export default function MainView({
   const [currentCategoryAction, setCurrentCategoryAction] = useState(null);
   const menuRef = useRef(null); // Referencia para el menú
   const taskInputRef = useRef(null); // Referencia del input de nueva tarea
+  const [renderKey, setRenderKey] = useState(0);
 
   // Detectar si la pantalla es pequeña (menos de 768px de ancho)
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -143,6 +144,7 @@ export default function MainView({
     });
 
     setTasks(updatedTasks);
+    setRenderKey((prevKey) => prevKey + 1); // Forzar re-renderizado
   };
 
   // Funcion para eliminar categoria
