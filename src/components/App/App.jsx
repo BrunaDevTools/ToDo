@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import "../../styles/global.css";
 import "../../styles/vars.css";
@@ -33,6 +33,19 @@ function App() {
 
   // Estado para controlar la vista actual en móviles
   const [currentView, setCurrentView] = useState("sidebar");
+
+  // Efecto para resetear el scroll cuando el teclado se cierre
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        window.scrollTo(0, 0);
+      }
+    };
+
+    window.visualViewport?.addEventListener("resize", handleResize);
+    return () =>
+      window.visualViewport?.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSetupComplete = (userData) => {
     setHasCompletedSetup(true);

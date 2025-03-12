@@ -110,6 +110,9 @@
 .tasksContainer {
   flex: 1 1 auto;
   overflow-y: auto;
+  overflow-anchor: none;
+  padding-bottom: 60px;
+  scroll-behavior: smooth;
   margin: 10px 0;
   padding-right: 5px;
   max-height: calc(100vh - 200px);
@@ -128,11 +131,17 @@
 
 /* Input: "Add a new task" */
 .taskInputContainer {
-  flex-shrink: 0;
+  /*flex-shrink: 0;
   margin-left: 0;
   margin-top: auto;
   padding: 16px 16px 16px 0;
-  border-top: 1px solid var(--turquesa-claro);
+  border-top: 1px solid var(--turquesa-claro); */
+  position: sticky;
+  bottom: 0;
+  background: var(--turquesa-base);
+  padding: 16px 0;
+  z-index: 10;
+  margin-top: auto;
 }
 
 .taskInputContainer form {
@@ -315,4 +324,26 @@ textarea {
 .backButton svg {
   font-size: 1.2rem;
   color: var(--main-font-color);
+}
+
+/* Moviles */
+@media (max-width: 768px) {
+  .mainView {
+    height: 100vh;
+    padding-bottom: env(
+      keyboard-inset-height,
+      0px
+    ); /* Nueva propiedad experimental */
+  }
+
+  .taskInputContainer {
+    padding-bottom: max(
+      16px,
+      env(safe-area-inset-bottom)
+    ); /* Considera el área segura */
+  }
+
+  .taskInput {
+    scroll-padding-bottom: 100px; /* Reserva espacio para el teclado */
+  }
 }

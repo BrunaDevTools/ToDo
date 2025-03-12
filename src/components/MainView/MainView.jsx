@@ -294,6 +294,17 @@ export default function MainView({
                 onChange={handleInputChange}
                 placeholder="Add a new task..."
                 ref={taskInputRef}
+                onFocus={(e) => {
+                  setTimeout(() => {
+                    e.target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center", // Para dispositivos grandes
+                    });
+                  }, 300); // Pequeño delay para asegurar que el teclado ya está visible
+                }}
+                onBlur={() => {
+                  window.scrollTo(0, 0);
+                }}
               />
             </form>
           </div>
