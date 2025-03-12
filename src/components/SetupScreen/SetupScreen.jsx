@@ -15,6 +15,7 @@ export default function SetupScreen({ onComplete }) {
   const [croppedImage, setCroppedImage] = useState(null); // Imagen recortada
   const [isCropModalOpen, setIsCropModalOpen] = useState(false); // Estado para el modal
   const imgRef = useRef(null);
+  const [originalImage, setOriginalImage] = useState(null); // Estado para almacenar la imagen original
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -22,6 +23,7 @@ export default function SetupScreen({ onComplete }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSrc(reader.result);
+        setOriginalImage(reader.result); // Guardar la imagen origianl
         setIsCropModalOpen(true); // Abrir el modal
       };
       reader.readAsDataURL(file);
@@ -69,6 +71,13 @@ export default function SetupScreen({ onComplete }) {
     };
     updateUserInfo(newUser);
     onComplete(newUser);
+  };
+
+  const closeModal = () => {
+    if (!croppedImage) {
+      setCroppedImage(originalImage); // Usar la imagen original si no se recortó
+    }
+    setIsCropModalOpen(false);
   };
 
   return (
@@ -130,7 +139,7 @@ export default function SetupScreen({ onComplete }) {
                 style={{ maxWidth: "100%", maxHeight: "300px" }}
               />
             </ReactCrop>
-            <button onClick={() => setIsCropModalOpen(false)}>Cerrar</button>
+            <button onClick={closeModal}>Cerrar</button>
           </div>
         </div>
       )}

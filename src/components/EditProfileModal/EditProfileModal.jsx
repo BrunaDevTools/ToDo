@@ -11,16 +11,22 @@ export default function EditProfileModal({
 }) {
   const [name, setName] = useState(currentName);
   const [src, setSrc] = useState(null); // Imagen original
+  const [selectedImage, setSelectedImage] = useState(null); // Guarda la imagen seleccionada
   const [crop, setCrop] = useState({ aspect: 1 / 1 }); // Recorte cuadrado
-  const [croppedImage, setCroppedImage] = useState(currentAvatar); // Imagen recortada
+  const [croppedImage, setCroppedImage] = useState(currentAvatar); // Imagen final guardada
   const imgRef = useRef(null);
+  const [originalAvatar] = useState(currentAvatar); // Guarda la imagen original
 
   // Manejar la subida de la imagen
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => setSrc(reader.result);
+      reader.onloadend = () => {
+        setSrc(reader.result);
+        setSelectedImage(reader.result); // Guardar la imagen seleccionada
+        setCroppedImage(null); // Reiniciar la imagen recortada
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -35,8 +41,8 @@ export default function EditProfileModal({
 
   // Guardar los cambios
   const handleSave = () => {
-    const updatedName = name.trim() !== "" ? name : currentName; // Si el nombre está vacío, mantiene el anterior
-    const updatedAvatar = src ? croppedImage : currentAvatar; // Si no se subió imagen, mantiene la anterior
+    const updatedName = name.trim() !== "" ? name : currentName;
+    const updatedAvatar = croppedImage || selectedImage || currentAvatar; // Usa recorte si existe, sino imagen subida, sino mantiene la actual
 
     onSave({ name: updatedName, avatar: updatedAvatar });
     onClose();
@@ -64,6 +70,15 @@ export default function EditProfileModal({
     );
 
     return canvas.toDataURL("image/jpeg");
+  };
+
+  // Si el usuario cancela, se cierra el modal y se mantiene la información original
+  const closeModal = () => {
+    setSrc(null); // Borra la imagen subida
+    setSelectedImage(null); // Borra la imagen seleccionada
+    setCroppedImage(null); // Mantiene la imagen original
+    setName(currentName); // Mantiene el nombre original
+    onClose();
   };
 
   return (
@@ -118,7 +133,7 @@ export default function EditProfileModal({
 
         {/* Botones de acción */}
         <div className={styles.modalActions}>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={closeModal}>Cancel</button>
           <button onClick={handleSave}>Save</button>
         </div>
       </div>
