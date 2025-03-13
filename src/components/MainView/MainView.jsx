@@ -308,7 +308,7 @@ export default function MainView({
                 className={styles.taskInput}
                 value={newTaskTitle}
                 onChange={handleInputChange}
-                placeholder="Add a new task..."
+                placeholder="Agregar nueva tarea..."
                 ref={taskInputRef}
                 onFocus={(e) => {
                   if (isMobile) {
@@ -367,7 +367,7 @@ export default function MainView({
           <textarea
             value={selectedNote.content || ""}
             onChange={handleNoteContentChange}
-            placeholder="Write your note here..."
+            placeholder="Escribe tu nota aquí..."
             className={styles.noteTextarea}
           />
         </div>
@@ -422,9 +422,9 @@ export default function MainView({
       {/* Mostrar mensaje cuando no hay nada seleccionado */}
       {!selectedCategory && !selectedNote && (
         <div className={styles.placeholderMessge}>
-          <p className={styles.hello}>Hello!</p>
+          <p className={styles.hello}>Hola!</p>
           <p className={styles.text}>
-            Select a category or note to get started...
+            Selecciona o crea una categoría o una nota para empezar...
           </p>
         </div>
       )}

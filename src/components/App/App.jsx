@@ -191,8 +191,8 @@ function App() {
               setMenuOpen(false);
             }}
             onSubmit={handleAddCategory}
-            title="New category"
-            placeholder="Category name..."
+            title="Nueva Categoría"
+            placeholder="Nombre de la categoría..."
           />
           <ModalForm
             isOpen={showNoteModal}
@@ -201,8 +201,8 @@ function App() {
               setMenuOpen(false);
             }}
             onSubmit={handleAddNote}
-            title="New Note"
-            placeholder="Note title..."
+            title="Nueva Nota"
+            placeholder="Título de la nota..."
           />
         </div>
       )}

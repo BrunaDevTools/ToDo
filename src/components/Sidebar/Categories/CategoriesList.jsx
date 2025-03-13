@@ -9,7 +9,7 @@ export default function CategoriesList({
 
   return (
     <div className={className}>
-      <h3>Categories</h3>
+      <h3>Categorías</h3>
       <ul>
         {categories.map((category) => (
           <li

@@ -9,10 +9,10 @@ export function CategoriesProvider({ children }) {
     return savedCategories
       ? JSON.parse(savedCategories)
       : [
-          { id: 1, name: "My day", icon: FaSun, fixed: true },
-          { id: 2, name: "Important", icon: FaStar, fixed: true },
+          { id: 1, name: "Mi día", icon: FaSun, fixed: true },
+          { id: 2, name: "Importante", icon: FaStar, fixed: true },
           { id: 3, name: "Plan", icon: FaList, fixed: false },
-          { id: 4, name: "Gym routine", icon: FaDumbbell, fixed: false },
+          { id: 4, name: "Rutina del Gym", icon: FaDumbbell, fixed: false },
         ];
   });
 

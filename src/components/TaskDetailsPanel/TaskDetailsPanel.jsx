@@ -194,11 +194,11 @@ export default function TaskDetailsPanel({ task, onClose }) {
           onClick={handleDeleteCategory}
           className={`${styles.deleteBtn} ${styles.deleteBtnCategory}`}
         >
-          Delete Category
+          Eliminar Categoría
         </button>
 
         <button onClick={handleDeleteTask} className={styles.deleteBtn}>
-          Delete Task
+          Eliminar tarea
           <LiaTrashSolid className={styles.trashIcon} />
         </button>
       </div>

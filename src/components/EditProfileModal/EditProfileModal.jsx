@@ -84,12 +84,12 @@ export default function EditProfileModal({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <h2>Edit Profile</h2>
+        <h2>Editar Perfil</h2>
 
         {/* Campo para el nombre */}
         <input
           type="text"
-          placeholder="Enter your name"
+          placeholder="Escribe tu nombre"
           value={name}
           onChange={(e) => setName(e.target.value)}
           autoComplete="off"
@@ -99,7 +99,7 @@ export default function EditProfileModal({
 
         {/* Campo para la imagen */}
         <label className={styles.uploadLabel}>
-          Choose Profile Image
+          Elige imagen de perfil
           <input
             type="file"
             accept="image/*"
@@ -133,8 +133,8 @@ export default function EditProfileModal({
 
         {/* Botones de acción */}
         <div className={styles.modalActions}>
-          <button onClick={closeModal}>Cancel</button>
-          <button onClick={handleSave}>Save</button>
+          <button onClick={closeModal}>Cancelar</button>
+          <button onClick={handleSave}>Guardar</button>
         </div>
       </div>
     </div>

@@ -95,7 +95,7 @@ export default function SetupScreen({ onComplete }) {
             className={styles.avatarPreview}
           />
           <label className={styles.avatarUpload}>
-            Choose Profile Image
+            Elige una imagen de perfil
             <input
               type="file"
               accept="image/*"
@@ -107,13 +107,13 @@ export default function SetupScreen({ onComplete }) {
           {/* Input para el nombre */}
           <input
             type="text"
-            placeholder="Enter your name..."
+            placeholder="Escribe tu nombre..."
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
 
           <button className={styles.btnContinue} type="submit">
-            Continue
+            Continuar
           </button>
         </form>
       </div>

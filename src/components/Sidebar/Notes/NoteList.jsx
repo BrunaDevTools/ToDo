@@ -6,7 +6,7 @@ export default function NoteList({
 }) {
   return (
     <div className={className}>
-      <h3>Notes</h3>
+      <h3>Notas</h3>
       <ul>
         {notes.map((note) => (
           <li
