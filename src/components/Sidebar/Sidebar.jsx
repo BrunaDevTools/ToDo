@@ -136,10 +136,10 @@ export default function Sidebar({
         </div>
         <div className={`${styles.buttonsContainer} ${styles.sidebarControls}`}>
           <button onClick={onAddCategory} className={styles.addButton}>
-            + New Category
+            + Nueva Categoría
           </button>
           <button onClick={onAddNote} className={styles.addButton}>
-            + New Note
+            + Nueva Nota
           </button>
         </div>
       </div>
