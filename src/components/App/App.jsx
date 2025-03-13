@@ -38,13 +38,21 @@ function App() {
   useEffect(() => {
     const handleResize = () => {
       if (window.visualViewport) {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
       }
     };
 
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      console.log("Botón de retroceso presionado");
+    };
+
     window.visualViewport?.addEventListener("resize", handleResize);
-    return () =>
+    window.addEventListener("popstate", handleBackButton);
+    return () => {
       window.visualViewport?.removeEventListener("resize", handleResize);
+      window.removeEventListener("popstate", handleBackButton);
+    };
   }, []);
 
   const handleSetupComplete = (userData) => {
